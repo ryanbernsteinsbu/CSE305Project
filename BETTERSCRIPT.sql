@@ -10,10 +10,14 @@
         EmailAddress VARCHAR(100),
         AccountCreationDate DATE NOT NULL,
         CreditCardNumber VARCHAR(25),
-        Rating INT,
+        Rating INT, 
         CHECK (Rating >= 1 AND Rating <= 5),
         CONSTRAINT PK_Customers PRIMARY KEY (CustomerID)
     );
+
+
+
+
 
     CREATE TABLE Employee (
         EmployeeID BIGINT NOT NULL,
