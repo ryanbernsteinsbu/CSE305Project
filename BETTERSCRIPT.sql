@@ -123,6 +123,10 @@
     INSERT INTO Manager (ManagerID, EmployeeID)
     VALUES (1, 789123456);
 
+    -- Insert CustomerRep (insert employees into customer reps
+    INSERT INTO CustomerRep(RepID, EmployeeID)
+    VALUES (1, 123456789);
+
     -- Insert Stocks
     INSERT INTO Stock (StockSymbol, StockName, StockType, SharePrice, NumberOfShares)
     VALUES 
