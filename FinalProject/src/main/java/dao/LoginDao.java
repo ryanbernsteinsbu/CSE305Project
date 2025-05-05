@@ -12,8 +12,8 @@ public class LoginDao {
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     
-    private static final int PRIME_1 = 31;
-    private static final int PRIME_MODULUS = 10000019;
+    private static final int PRIME_1 = 257;
+    private static final long PRIME_MODULUS = 9223372036854775783L;
     private static final Boolean IS_HASH = true;
 	
 	public Login login(String username, String password, String role) {
