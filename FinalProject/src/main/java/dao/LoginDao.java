@@ -2,11 +2,19 @@ package dao;
 
 import model.Login;
 
+import java.sql.*;
+
 public class LoginDao {
 	/*
 	 * This class handles all the database operations related to login functionality
 	 */
-	
+	private static final String URL = "jdbc:mysql://localhost:3306/demo";
+    private static final String USER = "root";
+    private static final String PASSWORD = "root";
+    
+    private static final int PRIME_1 = 31;
+    private static final int PRIME_MODULUS = 10000019;
+    private static final Boolean IS_HASH = true;
 	
 	public Login login(String username, String password, String role) {
 		/*
@@ -17,14 +25,57 @@ public class LoginDao {
 		 * password, which is the password of the user, is given as method parameter
 		 * Query to verify the username and password and fetch the role of the user, must be implemented
 		 */
-		
-		/*Sample data begins*/
-		Login login = new Login();
-		login.setRole(role);
-		return login;
-		/*Sample data ends*/
-		
-	}
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(URL, USER, PASSWORD); //establish the connection with SQL svr
+
+
+            String sql = "SELECT role FROM login WHERE email = ? AND password = ?"; 
+            pst = con.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setString(2, hashPassword(password));  //set values in string
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String dbRole = rs.getString("role");
+                Login login = new Login();
+                login.setUsername(username);
+                login.setPassword(hashPassword(password));
+                login.setRole(dbRole);
+                return login;
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	
+	public static int getSalt(String password) {
+        int salt = 0;
+        for (int i = 0; i < password.length(); i++) {
+            salt += password.charAt(i) * (i + 1); //create a salt based on the password
+        }
+        return salt;
+    }
+	
+	public static String hashPassword(String password) {
+        int salt = getSalt(password);
+        long hashValue = 0;
+
+        for (int i = 0; i < password.length(); i++) {
+            hashValue = (hashValue * PRIME_1 + (password.charAt(i) + salt + i)) % PRIME_MODULUS;
+        }
+
+        return (IS_HASH) ? String.valueOf(hashValue) : password;
+    }
 	
 	public String addUser(Login login) {
 		/*
@@ -36,9 +87,27 @@ public class LoginDao {
 		 * Return "failure" for an unsuccessful database operation
 		 */
 		
-		/*Sample data begins*/
-		return "success";
-		/*Sample data ends*/
+        Connection con = null;
+        PreparedStatement pst = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(URL, USER, PASSWORD); //establish the connection with SQL svr
+
+            String sql = "INSERT INTO login (email, password, role) VALUES (?, ?, ?)"; //prepared add to db string 
+            pst = con.prepareStatement(sql);
+            pst.setString(1, login.getUsername());
+            pst.setString(2, hashPassword(login.getPassword()));  
+            pst.setString(3, login.getRole());
+
+            int rows = pst.executeUpdate();
+            return rows > 0 ? "success" : "failure";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "failure";
+        }
+		
 	}
 
 }
