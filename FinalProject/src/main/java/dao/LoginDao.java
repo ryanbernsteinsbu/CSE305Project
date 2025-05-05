@@ -34,7 +34,7 @@ public class LoginDao {
             con = DriverManager.getConnection(URL, USER, PASSWORD); //establish the connection with SQL svr
 
 
-            String sql = "SELECT role FROM login WHERE email = ? AND password = ?"; 
+            String sql = "SELECT role FROM login WHERE username = ? AND password = ?"; 
             pst = con.prepareStatement(sql);
             pst.setString(1, username);
             pst.setString(2, hashPassword(password));  //set values in string
@@ -94,7 +94,7 @@ public class LoginDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD); //establish the connection with SQL svr
 
-            String sql = "INSERT INTO login (email, password, role) VALUES (?, ?, ?)"; //prepared add to db string 
+            String sql = "INSERT INTO login (username, password, role) VALUES (?, ?, ?)"; //prepared add to db string 
             pst = con.prepareStatement(sql);
             pst.setString(1, login.getUsername());
             pst.setString(2, hashPassword(login.getPassword()));  
