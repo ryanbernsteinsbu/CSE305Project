@@ -84,207 +84,249 @@ public class OrderDao {
 		 * Student code to place stock order
 		 * Employee can be null, when the order is placed directly by Customer
          * */
+    Connection con = null;
+    Statement  st  = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st  = con.createStatement();
 
-    	Connection con = null;
-        Statement st = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            String orderType;
-            if (order instanceof MarketOrder) orderType = ((MarketOrder)order).getBuySellType();
-            else if (order instanceof MarketOnCloseOrder) orderType = ((MarketOnCloseOrder)order).getBuySellType();
-            else orderType = "sell";
-            String priceType;
-            if (order instanceof TrailingStopOrder) priceType = "trailing stop " + ((TrailingStopOrder)order).getPercentage() + "%";
-            else if (order instanceof HiddenStopOrder) priceType = "$" + ((HiddenStopOrder)order).getPricePerShare();
-            else if (order instanceof MarketOnCloseOrder) priceType = "market on close";
-            else priceType = "market";
-            double transactionFee = stock.getPrice() * order.getNumShares() * 0.05;
-            Timestamp ts = new Timestamp(order.getDatetime().getTime());
-            String sql = "INSERT INTO StockOrder (OrderID,AccountNumber,EmployeeID,StockSymbol,OrderType,NumberOfShares,DateTime,TransactionFee,PriceType) VALUES ("
-                + order.getId() + "," 
-                + customer.getAccountNumber() + "," 
-                + (employee != null ? employee.getEmployeeID() : "NULL") + ",'" 
-                + stock.getSymbol() + "','" 
-                + orderType + "'," 
-                + order.getNumShares() + ",'" 
-                + ts.toString() + "'," 
-                + transactionFee + ",'" 
-                + priceType + "')";
-            int r = st.executeUpdate(sql);
-            return r > 0 ? "success" : "failure";
-        } catch (Exception e) {
-            System.out.println(e);
-            return "failure";
+        // Base fields
+        int    id        = order.getId();
+        Timestamp ts     = new Timestamp(order.getDatetime().getTime());
+        int    shares    = order.getNumShares();
+
+        // Determine orderType and subclass‐specific columns
+        String orderType    = "unknown";
+        String buySellType  = "NULL";
+        String hiddenStop   = "NULL";
+        String trailPercent = "NULL";
+
+        if (order instanceof MarketOrder) {
+            orderType   = "market";
+            buySellType = "'" + ((MarketOrder)order).getBuySellType() + "'";
+        }
+        else if (order instanceof MarketOnCloseOrder) {
+            orderType   = "marketOnClose";
+            buySellType = "'" + ((MarketOnCloseOrder)order).getBuySellType() + "'";
+        }
+        else if (order instanceof HiddenStopOrder) {
+            orderType  = "hiddenStop";
+            hiddenStop = String.valueOf(((HiddenStopOrder)order).getPricePerShare());
+        }
+        else if (order instanceof TrailingStopOrder) {
+            orderType    = "trailingStop";
+            trailPercent = String.valueOf(((TrailingStopOrder)order).getPercentage());
         }
 
+        // Build and execute INSERT
+        String sql = ""
+          + "INSERT INTO Orders "
+          + "(id, datetime, numShares, orderType, buySellType, hiddenStop, trailPercent) VALUES ("
+          +   id + ", '"
+          +   ts.toString() + "', "
+          +   shares + ", '"
+          +   orderType + "', "
+          +   buySellType + ", "
+          +   hiddenStop + ", "
+          +   trailPercent
+          + ")";
+        int rows = st.executeUpdate(sql);
+
+        return rows > 0 ? "success" : "failure";
+    } catch (Exception e) {
+        System.out.println(e);
+        return "failure";
     }
+}
 
     public List<Order> getOrderByStockSymbol(String stockSymbol) {
-        /*
-		 * Student code to get orders by stock symbol
-         */
-    	List<Order> orders = new ArrayList<Order>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT OrderID,AccountNumber,EmployeeID,StockSymbol,OrderType,NumberOfShares,DateTime,TransactionFee,PriceType FROM StockOrder WHERE StockSymbol='"
-                + stockSymbol + "'"
-            );
-            while (rs.next()) {
-                String pt = rs.getString("PriceType");
-                Order o;
-                if (pt.startsWith("trailing")) {
-                    TrailingStopOrder t = new TrailingStopOrder();
-                    t.setPercentage(Double.parseDouble(pt.replaceAll("[^0-9.]", "")));
-                    o = t;
-                } else if (pt.startsWith("$")) {
-                    HiddenStopOrder h = new HiddenStopOrder();
-                    h.setPricePerShare(Double.parseDouble(pt.substring(1)));
-                    o = h;
-                } else if (pt.contains("close")) {
-                    MarketOnCloseOrder m = new MarketOnCloseOrder();
-                    m.setBuySellType(rs.getString("OrderType"));
-                    o = m;
-                } else {
-                    MarketOrder m = new MarketOrder();
-                    m.setBuySellType(rs.getString("OrderType"));
-                    o = m;
-                }
-                o.setId(rs.getInt("OrderID"));
-                o.setDatetime(rs.getTimestamp("DateTime"));
-                o.setNumShares(rs.getInt("NumberOfShares"));
-                orders.add(o);
+    List<Order> orders = new ArrayList<>();
+    Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st = con.createStatement();
+        String sql =
+            "SELECT id, datetime, numShares, orderType, buySellType, hiddenStop, trailPercent " +
+            "FROM Orders " +
+            "WHERE stockSymbol = '" + stockSymbol + "'";
+        rs = st.executeQuery(sql);
+        while (rs.next()) {
+            String type = rs.getString("orderType");
+            Order o;
+            if ("market".equals(type)) {
+                MarketOrder m = new MarketOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
+            } else if ("marketOnClose".equals(type)) {
+                MarketOnCloseOrder m = new MarketOnCloseOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
+            } else if ("hiddenStop".equals(type)) {
+                HiddenStopOrder h = new HiddenStopOrder();
+                h.setPricePerShare(rs.getDouble("hiddenStop"));
+                o = h;
+            } else if ("trailingStop".equals(type)) {
+                TrailingStopOrder t = new TrailingStopOrder();
+                t.setPercentage(rs.getDouble("trailPercent"));
+                o = t;
+            } else {
+                MarketOrder m = new MarketOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
             }
-        } catch (Exception e) {
-            System.out.println(e);
+            o.setId(rs.getInt("id"));
+            o.setDatetime(rs.getTimestamp("datetime"));
+            o.setNumShares(rs.getInt("numShares"));
+            orders.add(o);
         }
-        return orders;
+    } catch (Exception e) {
+        System.out.println(e);
     }
+    return orders;
+}
 
     public List<Order> getOrderByCustomerName(String customerName) {
-         /*
-		 * Student code to get orders by customer name
-         */
-    	List<Order> orders = new ArrayList<Order>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT so.OrderID,so.AccountNumber,so.EmployeeID,so.StockSymbol,so.OrderType,so.NumberOfShares,so.DateTime,so.TransactionFee,so.PriceType "
-              + "FROM StockOrder so JOIN Account a ON so.AccountNumber=a.AccountNumber "
-              + "JOIN Customers c ON a.CustomerID=c.CustomerID "
-              + "WHERE c.LastName='" + customerName + "'"
-            );
-            while (rs.next()) {
-                String pt = rs.getString("PriceType");
-                Order o;
-                if (pt.startsWith("trailing")) {
-                    TrailingStopOrder t = new TrailingStopOrder();
-                    t.setPercentage(Double.parseDouble(pt.replaceAll("[^0-9.]", "")));
-                    o = t;
-                } else if (pt.startsWith("$")) {
-                    HiddenStopOrder h = new HiddenStopOrder();
-                    h.setPricePerShare(Double.parseDouble(pt.substring(1)));
-                    o = h;
-                } else if (pt.contains("close")) {
-                    MarketOnCloseOrder m = new MarketOnCloseOrder();
-                    m.setBuySellType(rs.getString("OrderType"));
-                    o = m;
-                } else {
-                    MarketOrder m = new MarketOrder();
-                    m.setBuySellType(rs.getString("OrderType"));
-                    o = m;
-                }
-                o.setId(rs.getInt("OrderID"));
-                o.setDatetime(rs.getTimestamp("DateTime"));
-                o.setNumShares(rs.getInt("NumberOfShares"));
-                orders.add(o);
+    List<Order> orders = new ArrayList<>();
+    Connection con = null;
+    Statement  st  = null;
+    ResultSet  rs  = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st  = con.createStatement();
+        String sql =
+            "SELECT o.id,o.datetime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
+            "FROM Orders o " +
+            "JOIN Account a ON o.accountNumber=a.accountId " +
+            "JOIN Customers c ON a.customerId=c.customerId " +
+            "WHERE c.lastName='" + customerName + "'";
+        rs = st.executeQuery(sql);
+        while (rs.next()) {
+            String type = rs.getString("orderType");
+            Order o;
+            if ("market".equals(type)) {
+                MarketOrder m = new MarketOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
+            } else if ("marketOnClose".equals(type)) {
+                MarketOnCloseOrder m = new MarketOnCloseOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
+            } else if ("hiddenStop".equals(type)) {
+                HiddenStopOrder h = new HiddenStopOrder();
+                h.setPricePerShare(rs.getDouble("hiddenStop"));
+                o = h;
+            } else if ("trailingStop".equals(type)) {
+                TrailingStopOrder t = new TrailingStopOrder();
+                t.setPercentage(rs.getDouble("trailPercent"));
+                o = t;
+            } else {
+                MarketOrder m = new MarketOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
             }
-        } catch (Exception e) {
-            System.out.println(e);
+            o.setId(rs.getInt("id"));
+            o.setDatetime(rs.getTimestamp("datetime"));
+            o.setNumShares(rs.getInt("numShares"));
+            orders.add(o);
         }
-        return orders;
+    } catch (Exception e) {
+        System.out.println(e);
     }
+    return orders;
+}
 
     public List<Order> getOrderHistory(String customerId) {
-        /*
-		 * The students code to fetch data from the database will be written here
-		 * Show orders for given customerId
-		 */
-    	List<Order> orders = new ArrayList<Order>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT so.OrderID,so.AccountNumber,so.EmployeeID,so.StockSymbol,so.OrderType,so.NumberOfShares,so.DateTime,so.TransactionFee,so.PriceType "
-              + "FROM StockOrder so JOIN Account a ON so.AccountNumber=a.AccountNumber "
-              + "WHERE a.CustomerID='" + customerId + "'"
-            );
-            while (rs.next()) {
-                String pt = rs.getString("PriceType");
-                Order o;
-                if (pt.startsWith("trailing")) {
-                    TrailingStopOrder t = new TrailingStopOrder();
-                    t.setPercentage(Double.parseDouble(pt.replaceAll("[^0-9.]", "")));
-                    o = t;
-                } else if (pt.startsWith("$")) {
-                    HiddenStopOrder h = new HiddenStopOrder();
-                    h.setPricePerShare(Double.parseDouble(pt.substring(1)));
-                    o = h;
-                } else if (pt.contains("close")) {
-                    MarketOnCloseOrder m = new MarketOnCloseOrder();
-                    m.setBuySellType(rs.getString("OrderType"));
-                    o = m;
-                } else {
-                    MarketOrder m = new MarketOrder();
-                    m.setBuySellType(rs.getString("OrderType"));
-                    o = m;
-                }
-                o.setId(rs.getInt("OrderID"));
-                o.setDatetime(rs.getTimestamp("DateTime"));
-                o.setNumShares(rs.getInt("NumberOfShares"));
-                orders.add(o);
+    List<Order> orders = new ArrayList<>();
+    Connection con = null;
+    Statement  st  = null;
+    ResultSet  rs  = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st  = con.createStatement();
+        String sql =
+            "SELECT o.id,o.datetime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
+            "FROM Orders o " +
+            "JOIN Account a ON o.accountNumber=a.accountId " +
+            "WHERE a.customerId='" + customerId + "'";
+        rs = st.executeQuery(sql);
+        while (rs.next()) {
+            String type = rs.getString("orderType");
+            Order o;
+            if ("market".equals(type)) {
+                MarketOrder m = new MarketOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
+            } else if ("marketOnClose".equals(type)) {
+                MarketOnCloseOrder m = new MarketOnCloseOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
+            } else if ("hiddenStop".equals(type)) {
+                HiddenStopOrder h = new HiddenStopOrder();
+                h.setPricePerShare(rs.getDouble("hiddenStop"));
+                o = h;
+            } else if ("trailingStop".equals(type)) {
+                TrailingStopOrder t = new TrailingStopOrder();
+                t.setPercentage(rs.getDouble("trailPercent"));
+                o = t;
+            } else {
+                MarketOrder m = new MarketOrder();
+                m.setBuySellType(rs.getString("buySellType"));
+                o = m;
             }
-        } catch (Exception e) {
-            System.out.println(e);
+            o.setId(rs.getInt("id"));
+            o.setDatetime(rs.getTimestamp("datetime"));
+            o.setNumShares(rs.getInt("numShares"));
+            orders.add(o);
         }
-        return orders;
+    } catch (Exception e) {
+        System.out.println(e);
     }
-
-
+    return orders;
+}
+	
     public List<OrderPriceEntry> getOrderPriceHistory(String orderId) {
-
-        /*
-		 * The students code to fetch data from the database will be written here
-		 * Query to view price history of hidden stop order or trailing stop order
-		 * Use setPrice to show hidden-stop price and trailing-stop price
-		 */
-        List<OrderPriceEntry> orderPriceHistory = new ArrayList<OrderPriceEntry>();
-
-        for (int i = 0; i < 10; i++) {
-            OrderPriceEntry entry = new OrderPriceEntry();
-            entry.setOrderId(orderId);
-            entry.setDate(new Date());
-            entry.setStockSymbol("aapl");
-            entry.setPricePerShare(150.0);
-            entry.setPrice(100.0);
-            orderPriceHistory.add(entry);
+    List<OrderPriceEntry> history = new ArrayList<>();
+    Connection con = null;
+    Statement  st  = null;
+    ResultSet  rs  = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st  = con.createStatement();
+        String sql =
+            "SELECT o.id, o.stockSymbol, o.datetime, o.orderType, o.hiddenStop, o.trailPercent, s.sharePrice " +
+            "FROM Orders o JOIN Stock s ON o.stockSymbol = s.StockSymbol " +
+            "WHERE o.id = " + orderId;
+        rs = st.executeQuery(sql);
+        while (rs.next()) {
+            OrderPriceEntry e = new OrderPriceEntry();
+            e.setOrderId       ( rs.getString("id") );
+            e.setDate          ( rs.getTimestamp("datetime") );
+            e.setStockSymbol   ( rs.getString("stockSymbol") );
+            double sharePrice  = rs.getDouble("sharePrice");
+            e.setPricePerShare ( sharePrice );
+            String type        = rs.getString("orderType");
+            if ("hiddenStop".equals(type)) {
+                e.setPrice(rs.getDouble("hiddenStop"));
+            }
+            else if ("trailingStop".equals(type)) {
+                double pct = rs.getDouble("trailPercent");
+                e.setPrice(sharePrice * (1 - pct/100.0));
+            }
+            else {
+                e.setPrice(sharePrice);
+            }
+            history.add(e);
         }
-        return orderPriceHistory;
+    } catch (Exception ex) {
+        System.out.println(ex);
     }
+    return history;
+}
 }
