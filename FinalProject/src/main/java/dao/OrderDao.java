@@ -97,7 +97,7 @@ public class OrderDao {
         Timestamp ts     = new Timestamp(order.getDatetime().getTime());
         int    shares    = order.getNumShares();
 	int    accountNumber = customer.getAccountNumber();
-        String employeeId    = (employee != null ? "'" + employee.getEmployeeID() + "'" : "NULL");
+        String employeeID    = (employee != null ? "'" + employee.getEmployeeID() + "'" : "NULL");
 
         // Determine orderType and subclass‐specific columns
         String orderType    = "unknown";
@@ -125,7 +125,7 @@ public class OrderDao {
         // Build and execute INSERT
         String sql = ""
           + "INSERT INTO orders "
-          + "(orderID, dateTime, numShares, orderType, customerID, employeeID, buySellType, hiddenStop, trailPercent) VALUES ("
+          + "(orderID, dateTime, numShares, orderType, accountNum, employeeID, buySellType, hiddenStop, trailPercent) VALUES ("
           +   id + ", '"
           +   ts.toString() + "', "
           +   shares + ", '"
@@ -154,9 +154,9 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         String sql =
-            "SELECT orderID, datetime, numShares, orderType, accountNumber, employeeID buySellType, hiddenStop, trailPercent " +
-            "FROM orders " +
-            "WHERE stockSymbol = '" + stockSymbol + "'";
+            "SELECT o.orderID, o.datetime, o.numShares, o.orderType, o.accountNumber, o.employeeID, o.buySellType, o.hiddenStop, o.trailPercent " +
+            "FROM orders o " +
+            "WHERE o.stockSymbol = '" + stockSymbol + "'";
         rs = st.executeQuery(sql);
         while (rs.next()) {
             String type = rs.getString("orderType");
