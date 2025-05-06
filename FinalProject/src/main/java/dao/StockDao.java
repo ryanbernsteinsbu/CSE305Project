@@ -54,18 +54,18 @@ public class StockDao {
     		con = DriverManager.getConnection(URL, USER, PASSWORD);
     		st = con.createStatement();
     		String query = 
-    	    "SELECT name, symbol, price, num_shares, type " +
+    	    "SELECT stockName, stockSymbol, sharePrice, numShares, stockType " +
     	    "FROM stock " +
-    	    "WHERE num_shares > 0";
+    	    "WHERE numShares > 0";
     	    rs = st.executeQuery(query);
     	    
     	    while(rs.next()) {
     	    	Stock s = new Stock();
-    	    	s.setName(rs.getString("name"));
-    	    	s.setSymbol(rs.getString("symbol"));
-    	    	s.setPrice(rs.getDouble("price"));
-    	    	s.setNumShares(rs.getInt("num_shares"));
-    	    	s.setType(rs.getString("type"));
+    	    	s.setName(rs.getString("stockName"));
+                s.setSymbol(rs.getString("stockSymbol"));
+                s.setPrice(rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt("numShares"));
+                s.setType(rs.getString("stockType"));
     	    	stocks.add(s);
     	    }
     	} catch (Exception e) {
@@ -74,68 +74,62 @@ public class StockDao {
     	return stocks;
     }
 
-	public List<Stock> getAllStocks() {
-		
-		/*
-		 * The students code to fetch data from the database will be written here
-		 * Return list of stocks
-		 */
-		List<Stock> stocks = new ArrayList<Stock>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st  = con.createStatement();
-            String query = 
-              "SELECT name, symbol, price, num_shares, type " +
-              "FROM stock";
-            rs = st.executeQuery(query);
-
-            while (rs.next()) {
-                Stock s = new Stock();
-                s.setName(rs.getString("name"));
-                s.setSymbol(rs.getString("symbol"));
-                s.setPrice(rs.getDouble("price"));
-                s.setNumShares(rs.getInt("num_shares"));
-                s.setType(rs.getString("type"));
-                stocks.add(s);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+public List<Stock> getAllStocks() {
+    List<Stock> stocks = new ArrayList<>();
+    Connection con = null;
+    Statement  st  = null;
+    ResultSet  rs  = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st  = con.createStatement();
+        String query =
+            "SELECT stockName, stockSymbol, sharePrice, numShares, stockType " +
+            "FROM stock";
+        rs = st.executeQuery(query);
+        while (rs.next()) {
+            Stock s = new Stock();
+            s.setName     (rs.getString("stockName"));
+            s.setSymbol   (rs.getString("stockSymbol"));
+            s.setPrice    (rs.getDouble("sharePrice"));
+            s.setNumShares(rs.getInt   ("numShares"));
+            s.setType     (rs.getString("stockType"));
+            stocks.add(s);
         }
-        return stocks;
-	}
-
-    public Stock getStockBySymbol(String stockSymbol)
-    {
-        /*
-		 * The students code to fetch data from the database will be written here
-		 * Return stock matching symbol
-		 */
-    	Connection con = null;
-    	Statement st = null;
-    	ResultSet rs = null;
-    	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT name,symbol,price,num_shares,type FROM stock WHERE symbol='" + stockSymbol + "'");
-            if (rs.next()) {
-                Stock s = new Stock();
-                s.setName(rs.getString("name"));
-                s.setSymbol(rs.getString("symbol"));
-                s.setPrice(rs.getDouble("price"));
-                s.setNumShares(rs.getInt("num_shares"));
-                s.setType(rs.getString("type"));
-                return s;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+    } catch (Exception e) {
+        System.out.println(e);
     }
+    return stocks;
+}
+
+    public Stock getStockBySymbol(String stockSymbol) {
+    Connection con = null;
+    Statement  st  = null;
+    ResultSet  rs  = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st  = con.createStatement();
+        rs = st.executeQuery(
+            "SELECT stockName, stockSymbol, sharePrice, numShares, stockType " +
+            "FROM stock " +
+            "WHERE stockSymbol = '" + stockSymbol + "'"
+        );
+        if (rs.next()) {
+            Stock s = new Stock();
+            s.setName     (rs.getString("stockName"));
+            s.setSymbol   (rs.getString("stockSymbol"));
+            s.setPrice    (rs.getDouble("sharePrice"));
+            s.setNumShares(rs.getInt   ("numShares"));
+            s.setType     (rs.getString("stockType"));
+            return s;
+        }
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+    return null;
+}
+
 
     public String setStockPrice(String stockSymbol, double stockPrice) {
         /*
@@ -148,7 +142,7 @@ public class StockDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
-            int rows = st.executeUpdate("UPDATE stock SET price=" + stockPrice + " WHERE symbol='" + stockSymbol + "'");
+            int rows = st.executeUpdate("UPDATE stock SET sharePrice=" + stockPrice + " WHERE symbol='" + stockSymbol + "'");
             return rows > 0 ? "success" : "failure";
         } catch (Exception e) {
             System.out.println(e);
@@ -162,7 +156,7 @@ public class StockDao {
 		 * The students code to fetch data from the database will be written here
 		 * Get list of bestseller stocks
 		 */
-		List<Stock> stocks = new ArrayList<Stock>();
+	    List<Stock> stocks = new ArrayList<Stock>();
 	    Connection con = null;
 	    Statement st = null;
 	    ResultSet rs = null;
@@ -171,18 +165,18 @@ public class StockDao {
 	        con = DriverManager.getConnection(URL, USER, PASSWORD);
 	        st = con.createStatement();
 	        rs = st.executeQuery(
-	            "SELECT s.name,s.symbol,s.price,SUM(o.num_shares) AS num_shares,s.type " +
-	            "FROM stock s JOIN orders o ON s.symbol=o.stock_symbol " +
-	            "GROUP BY s.symbol,s.name,s.price,s.type " +
-	            "ORDER BY SUM(o.num_shares) DESC"
+	            "SELECT s.stockName, s.stockSymbol, s.sharePrice, SUM(o.numShares) AS numShares, s.stockType " +
+	            "FROM stock s JOIN orders o ON s.stockSymbol = o.stockSymbol " +
+	            "GROUP BY s.stockSymbol, s.stockName, s.sharePrice, s.stockType " +
+	            "ORDER BY SUM(o.numShares) DESC"
 	        );
 	        while (rs.next()) {
 	            Stock s = new Stock();
-	            s.setName(rs.getString("name"));
-	            s.setSymbol(rs.getString("symbol"));
-	            s.setPrice(rs.getDouble("price"));
-	            s.setNumShares(rs.getInt("num_shares"));
-	            s.setType(rs.getString("type"));
+	            s.setName(rs.getString("stockName"));
+	            s.setSymbol(rs.getString("stockSymbol"));
+	            s.setPrice(rs.getDouble("sharePrice"));
+	            s.setNumShares(rs.getInt("numShares"));
+	            s.setType(rs.getString("stockType"));
 	            stocks.add(s);
 	        }
 	    } catch (Exception e) {
@@ -206,19 +200,19 @@ public class StockDao {
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
             rs = st.executeQuery(
-                "SELECT s.name,s.symbol,s.price,SUM(o.num_shares) AS num_shares,s.type " +
-                "FROM stock s JOIN orders o ON s.symbol=o.stock_symbol " +
-                "WHERE o.customer_account_number='" + customerID + "' " +
-                "GROUP BY s.symbol,s.name,s.price,s.type " +
-                "ORDER BY SUM(o.num_shares) DESC"
+                "SELECT s.stockName, s.stockSymbol, s.sharePrice, SUM(o.numShares) AS numShares, s.stockType " +
+                "FROM stock s JOIN orders o ON s.stockSymbol = o.stockSymbol " +
+                "WHERE o.accountNumber='" + customerID + "' " +
+                "GROUP BY s.stockSymbol, s.stockName, s.sharePrice, s.stockType " +
+                "ORDER BY SUM(o.numShares) DESC"
             );
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("name"));
-                s.setSymbol(rs.getString("symbol"));
-                s.setPrice(rs.getDouble("price"));
-                s.setNumShares(rs.getInt("num_shares"));
-                s.setType(rs.getString("type"));
+                s.setName(rs.getString("stockName"));
+                s.setSymbol(rs.getString("stockSymbol"));
+                s.setPrice(rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt("numShares"));
+                s.setType(rs.getString("stockType"));
                 stocks.add(s);
             }
         } catch (Exception e) {
@@ -242,18 +236,18 @@ public class StockDao {
 	        con = DriverManager.getConnection(URL, USER, PASSWORD);
 	        st = con.createStatement();
 	        rs = st.executeQuery(
-	            "SELECT s.name,s.symbol,s.price,p.num_shares,s.type " +
+	            "SELECT s.stockName,s.stockSymbol,s.sharePrice,p.numShares,s.stockType " +
 	            "FROM stock s JOIN portfolio p " +
-	            "ON s.symbol=p.stock_symbol " +
-	            "WHERE p.customer_account_number='" + customerId + "'"
+	            "ON s.stockSymbol=p.stockSymbol " +
+	            "WHERE p.accountNumber='" + customerId + "'"
 	        );
 	        while (rs.next()) {
 	            Stock s = new Stock();
-	            s.setName(rs.getString("name"));
-	            s.setSymbol(rs.getString("symbol"));
-	            s.setPrice(rs.getDouble("price"));
-	            s.setNumShares(rs.getInt("num_shares"));
-	            s.setType(rs.getString("type"));
+	            s.setName(rs.getString("stockName"));
+	            s.setSymbol(rs.getString("stockSymbol"));
+	            s.setPrice(rs.getDouble("sharePrice"));
+	            s.setNumShares(rs.getInt("numShares"));
+	            s.setType(rs.getString("stockType"));
 	            stocks.add(s);
 	        }
 	    } catch (Exception e) {
@@ -276,14 +270,14 @@ public class StockDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT name,symbol,price,num_shares,type FROM stock WHERE name LIKE '%" + name + "%'");
+            rs = st.executeQuery("SELECT stockName,stockSymbol,sharePrice,numShares,stockType FROM stock WHERE stockName LIKE '%" + name + "%'");
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("name"));
-                s.setSymbol(rs.getString("symbol"));
-                s.setPrice(rs.getDouble("price"));
-                s.setNumShares(rs.getInt("num_shares"));
-                s.setType(rs.getString("type"));
+                s.setName(rs.getString("stockName"));
+                s.setSymbol(rs.getString("stockSymbol"));
+                s.setPrice(rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt("numShares"));
+                s.setType(rs.getString("stockType"));
                 stocks.add(s);
             }
         } catch (Exception e) {
@@ -308,22 +302,22 @@ public class StockDao {
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
             rs = st.executeQuery(
-                "SELECT s.name,s.symbol,s.price,SUM(o.num_shares) AS num_shares,s.type " +
-                "FROM stock s JOIN orders o ON s.symbol=o.stock_symbol " +
-                "WHERE s.symbol NOT IN (" +
-                  "SELECT stock_symbol FROM portfolio " +
-                  "WHERE customer_account_number='" + customerID + "'" +
+                "SELECT s.stockName,s.stockSymbol,s.sharePrice,SUM(o.numShares) AS numShares,s.stockType " +
+                "FROM stock s JOIN orders o ON s.stockSymbol=o.stockSymbol " +
+                "WHERE s.stockSymbol NOT IN (" +
+                  "SELECT stockSymbol FROM portfolio " +
+                  "WHERE accountNumber='" + customerID + "'" +
                 ") " +
-                "GROUP BY s.symbol,s.name,s.price,s.type " +
-                "ORDER BY SUM(o.num_shares) DESC LIMIT 5"
+                "GROUP BY s.stockSymbol,s.stockName,s.sharePrice,s.stockType " +
+                "ORDER BY SUM(o.numShares) DESC LIMIT 5"
             );
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("name"));
-                s.setSymbol(rs.getString("symbol"));
-                s.setPrice(rs.getDouble("price"));
-                s.setNumShares(rs.getInt("num_shares"));
-                s.setType(rs.getString("type"));
+                s.setName(rs.getString("stockName"));
+                s.setSymbol(rs.getString("stockSymbol"));
+                s.setPrice(rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt("numShares"));
+                s.setType(rs.getString("stockType"));
                 stocks.add(s);
             }
         } catch (Exception e) {
@@ -347,16 +341,16 @@ public class StockDao {
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
             rs = st.executeQuery(
-                "SELECT StockName,StockSymbol,SharePrice,NumberOfShares,StockType " +
-                "FROM Stock WHERE StockSymbol='" + stockSymbol + "'"
+                "SELECT stockName,stockSymbol,sharePrice,numShares,stockType " +
+                "FROM stock WHERE stockSymbol='" + stockSymbol + "'"
             );
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("StockName"));
-                s.setSymbol(rs.getString("StockSymbol"));
-                s.setPrice(rs.getDouble("SharePrice"));
-                s.setNumShares(rs.getInt("NumberOfShares"));
-                s.setType(rs.getString("StockType"));
+                s.setName(rs.getString("stockName"));
+                s.setSymbol(rs.getString("stockSymbol"));
+                s.setPrice(rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt("numShares"));
+                s.setType(rs.getString("stockType"));
                 stocks.add(s);
             }
         } catch (Exception e) {
@@ -379,9 +373,9 @@ public class StockDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT DISTINCT type FROM stock");
+            rs = st.executeQuery("SELECT DISTINCT stockType FROM stock");
             while (rs.next()) {
-                types.add(rs.getString("type"));
+                types.add(rs.getString("stockType"));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -403,14 +397,14 @@ public class StockDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT name,symbol,price,num_shares,type FROM stock WHERE type='" + stockType + "'");
+            rs = st.executeQuery("SELECT stockName,stockSymbol,sharePrice,numShares,stockType FROM stock WHERE stockType='" + stockType + "'");
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("name"));
-                s.setSymbol(rs.getString("symbol"));
-                s.setPrice(rs.getDouble("price"));
-                s.setNumShares(rs.getInt("num_shares"));
-                s.setType(rs.getString("type"));
+                s.setName(rs.getString("stockName"));
+                s.setSymbol(rs.getString("stockSymbol"));
+                s.setPrice(rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt("numShares"));
+                s.setType(rs.getString("stockType"));
                 stocks.add(s);
             }
         } catch (Exception e) {
