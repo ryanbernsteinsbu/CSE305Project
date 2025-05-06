@@ -1,163 +1,236 @@
 package dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Customer;
 import model.Location;
 
-import java.util.stream.IntStream;
-
 public class CustomerDao {
-	/*
-	 * This class handles all the database operations related to the customer table
-	 */
 
-    public Customer getDummyCustomer() {
-        Location location = new Location();
-        location.setZipCode(11790);
-        location.setCity("Stony Brook");
-        location.setState("NY");
+	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/CSE305";
+    private static final String JDBC_USER     = "root";
+    private static final String JDBC_PASSWORD = "root";
 
-        Customer customer = new Customer();
-        customer.setId("111-11-1111");
-        customer.setAddress("123 Success Street");
-        customer.setLastName("Lu");
-        customer.setFirstName("Shiyong");
-        customer.setEmail("shiyong@cs.sunysb.edu");
-        customer.setLocation(location);
-        customer.setTelephone("5166328959");
-        customer.setCreditCard("1234567812345678");
-        customer.setRating(1);
-
-        return customer;
-    }
-    public List<Customer> getDummyCustomerList() {
-        /*Sample data begins*/
-        List<Customer> customers = new ArrayList<Customer>();
-
-        for (int i = 0; i < 10; i++) {
-            customers.add(getDummyCustomer());
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new ExceptionInInitializerError("MySQL JDBC driver not found; add it to the class‑path");
         }
-		/*Sample data ends*/
-
-        return customers;
     }
 
-    /**
-	 * @param String searchKeyword
-	 * @return ArrayList<Customer> object
-	 */
-	public List<Customer> getCustomers(String searchKeyword) {
-		/*
-		 * This method fetches one or more customers based on the searchKeyword and returns it as an ArrayList
-		 */
-		
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+    }
 
-		/*
-		 * The students code to fetch data from the database based on searchKeyword will be written here
-		 * Each record is required to be encapsulated as a "Customer" class object and added to the "customers" List
-		 */
-		
-		return getDummyCustomerList();
-	}
+    private Customer mapRow(ResultSet rs) throws SQLException {
+        Customer c   = new Customer();
+        Location loc = new Location();
 
+        c.setId(rs.getString("id"));
+        c.setFirstName(rs.getString("first_name"));
+        c.setLastName(rs.getString("last_name"));
+        c.setEmail(rs.getString("email"));
+        c.setAddress(rs.getString("address"));
+        c.setTelephone(rs.getString("telephone"));
+        c.setCreditCard(rs.getString("credit_card"));
+        c.setRating(rs.getInt("rating"));
 
-	public Customer getHighestRevenueCustomer() {
-		/*
-		 * This method fetches the customer who generated the highest total revenue and returns it
-		 * The students code to fetch data from the database will be written here
-		 * The customer record is required to be encapsulated as a "Customer" class object
-		 */
+        loc.setCity(rs.getString("city"));
+        loc.setState(rs.getString("state"));
+        loc.setZipCode(rs.getInt("zip_code"));
+        c.setLocation(loc);
 
-		return getDummyCustomer();
-	}
-
-	public Customer getCustomer(String customerID) {
-
-		/*
-		 * This method fetches the customer details and returns it
-		 * customerID, which is the Customer's ID who's details have to be fetched, is given as method parameter
-		 * The students code to fetch data from the database will be written here
-		 * The customer record is required to be encapsulated as a "Customer" class object
-		 */
-		
-		return getDummyCustomer();
-	}
-	
-	public String deleteCustomer(String customerID) {
-
-		/*
-		 * This method deletes a customer returns "success" string on success, else returns "failure"
-		 * The students code to delete the data from the database will be written here
-		 * customerID, which is the Customer's ID who's details have to be deleted, is given as method parameter
-		 */
-
-		/*Sample data begins*/
-		return "success";
-		/*Sample data ends*/
-		
-	}
+        return c;
+    }
 
 
-	public String getCustomerID(String email) {
-		/*
-		 * This method returns the Customer's ID based on the provided email address
-		 * The students code to fetch data from the database will be written here
-		 * username, which is the email address of the customer, who's ID has to be returned, is given as method parameter
-		 * The Customer's ID is required to be returned as a String
-		 */
+    public String addCustomer(Customer customer) {
+        final String sql = "INSERT INTO customer (id, first_name, last_name, email, address, city, state, zip_code, telephone, credit_card, rating) " +
+                           "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-		return "111-11-1111";
-	}
+            ps.setString(1, customer.getId());
+            ps.setString(2, customer.getFirstName());
+            ps.setString(3, customer.getLastName());
+            ps.setString(4, customer.getEmail());
+            ps.setString(5, customer.getAddress());
+            ps.setString(6, customer.getLocation().getCity());
+            ps.setString(7, customer.getLocation().getState());
+            ps.setInt   (8, customer.getLocation().getZipCode());
+            ps.setString(9, customer.getTelephone());
+            ps.setString(10, customer.getCreditCard());
+            ps.setInt   (11, customer.getRating());
 
+            return ps.executeUpdate() == 1 ? "success" : "failure";
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return "failure";
+        }
+    }
 
-	public String addCustomer(Customer customer) {
+    public String editCustomer(Customer customer) {
+        final String sql = "UPDATE customer SET first_name = ?, last_name = ?, email = ?, address = ?, city = ?, state = ?, zip_code = ?, telephone = ?, credit_card = ?, rating = ? WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-		/*
-		 * All the values of the add customer form are encapsulated in the customer object.
-		 * These can be accessed by getter methods (see Customer class in model package).
-		 * e.g. firstName can be accessed by customer.getFirstName() method.
-		 * The sample code returns "success" by default.
-		 * You need to handle the database insertion of the customer details and return "success" or "failure" based on result of the database insertion.
-		 */
-		
-		/*Sample data begins*/
-		return "success";
-		/*Sample data ends*/
+            ps.setString(1, customer.getFirstName());
+            ps.setString(2, customer.getLastName());
+            ps.setString(3, customer.getEmail());
+            ps.setString(4, customer.getAddress());
+            ps.setString(5, customer.getLocation().getCity());
+            ps.setString(6, customer.getLocation().getState());
+            ps.setInt   (7, customer.getLocation().getZipCode());
+            ps.setString(8, customer.getTelephone());
+            ps.setString(9, customer.getCreditCard());
+            ps.setInt   (10, customer.getRating());
+            ps.setString(11, customer.getId());
 
-	}
+            return ps.executeUpdate() == 1 ? "success" : "failure";
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return "failure";
+        }
+    }
 
-	public String editCustomer(Customer customer) {
-		/*
-		 * All the values of the edit customer form are encapsulated in the customer object.
-		 * These can be accessed by getter methods (see Customer class in model package).
-		 * e.g. firstName can be accessed by customer.getFirstName() method.
-		 * The sample code returns "success" by default.
-		 * You need to handle the database update and return "success" or "failure" based on result of the database update.
-		 */
-		
-		/*Sample data begins*/
-		return "success";
-		/*Sample data ends*/
+    public String deleteCustomer(String customerID) {
+        final String sql = "DELETE FROM customer WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-	}
+            ps.setString(1, customerID);
+            return ps.executeUpdate() == 1 ? "success" : "failure";
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return "failure";
+        }
+    }
+
+    public List<Customer> getCustomers(String searchKeyword) {
+        final String keyword = (searchKeyword == null || searchKeyword.isBlank()) ? "%" : ("%" + searchKeyword + "%");
+        final String sql = "SELECT * FROM customer WHERE first_name LIKE ? OR last_name LIKE ? OR email LIKE ?";
+        List<Customer> list = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, keyword);
+            ps.setString(2, keyword);
+            ps.setString(3, keyword);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(mapRow(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public Customer getCustomer(String customerID) {
+        final String sql = "SELECT * FROM customer WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, customerID);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapRow(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public Customer getHighestRevenueCustomer() {
+        final String sql = "SELECT c.*, SUM(o.total) AS revenue " +
+                           "FROM customer c JOIN orders o ON c.id = o.customer_id " +
+                           "GROUP BY c.id ORDER BY revenue DESC LIMIT 1";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return mapRow(rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Customer> getCustomerMailingList() {
+        final String sql = "SELECT * FROM customer";
+        List<Customer> list = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-		/*
-		 * This method fetches the all customer mailing details and returns it
-		 * The students code to fetch data from the database will be written here
-		 */
-
-        return getDummyCustomerList();
+            while (rs.next()) {
+                list.add(mapRow(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
     }
 
     public List<Customer> getAllCustomers() {
-        /*
-		 * This method fetches returns all customers
-		 */
-        return getDummyCustomerList();
+        return getCustomerMailingList();
     }
+
+    public String getCustomerID(String email) {
+        final String sql = "SELECT id FROM customer WHERE email = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("id");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+	public Customer getDummyCustomer() {
+		Location location = new Location();
+		location.setZipCode(11790);
+		location.setCity("Stony Brook");
+		location.setState("NY");
+
+		Customer customer = new Customer();
+		customer.setId("111-11-1111");
+		customer.setAddress("123 Success Street");
+		customer.setLastName("Lu");
+		customer.setFirstName("Shiyong");
+		customer.setEmail("shiyong@cs.sunysb.edu");
+		customer.setLocation(location);
+		customer.setTelephone("5166328959");
+		customer.setCreditCard("1234567812345678");
+		customer.setRating(1);
+
+		return customer;
+	}
+
+	public List<Customer> getDummyCustomerList() {
+		List<Customer> customers = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			customers.add(getDummyCustomer());
+		}
+		return customers;
+	}
 }
