@@ -8,13 +8,13 @@ public class LoginDao {
 	/*
 	 * This class handles all the database operations related to login functionality
 	 */
-	private static final String URL = "jdbc:mysql://localhost:3306/demo";
+	private static final String URL = "jdbc:mysql://localhost:3306/cse305?useSSL=false";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "12345";
     
     private static final int PRIME_1 = 257;
     private static final long PRIME_MODULUS = 9223372036854775783L;
-    private static final Boolean IS_HASH = true;
+    private static final Boolean IS_HASH = false;
 	
 	public Login login(String username, String password, String role) {
 		/*
@@ -43,6 +43,9 @@ public class LoginDao {
 
             if (rs.next()) {
                 String dbRole = rs.getString("role");
+                if(!role.equals(dbRole)) {
+                	return null;
+                }
                 Login login = new Login();
                 login.setUsername(username);
                 login.setPassword(hashPassword(password));
