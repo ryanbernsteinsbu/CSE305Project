@@ -77,11 +77,13 @@
         accountNum BIGINT NOT NULL,
         employeeID BIGINT,
         stockSymbol VARCHAR(10) NOT NULL,
-        orderType VARCHAR(20) NOT NULL,
+        orderType VARCHAR(20),
         numShares INT NOT NULL,
         dateTime DATETIME NOT NULL,
         transactionFee DECIMAL(10,2),
         priceType VARCHAR(20),
+        percentage INT,
+        pricePerShare INT,
         CHECK (numShares >= 0),
         CHECK (TransactionFee >= 0),
         CONSTRAINT PK_StockOrder PRIMARY KEY (orderID),
@@ -99,6 +101,9 @@
             ON UPDATE CASCADE
     );
     
-
-
+	CREATE TABLE login (
+		username VARCHAR(50) NOT NULL,
+        password VARCHAR(50) NOT NULL,
+		role VARCHAR(50) NOT NULL
+    );
     
