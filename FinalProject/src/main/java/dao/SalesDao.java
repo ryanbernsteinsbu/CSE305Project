@@ -1,4 +1,4 @@
-package dao;
+  package dao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,10 +45,10 @@ public class SalesDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         rs = st.executeQuery(
-            "SELECT o.DateTime AS date, o.NumberOfShares AS numShares, o.AccountNumber AS accountId, " +
-            "s.SharePrice AS pricePerShare, o.StockSymbol AS stockSymbol " +
-            "FROM Orders o JOIN Stock s ON o.StockSymbol = s.StockSymbol " +
-            "WHERE MONTH(o.DateTime) = " + month + " AND YEAR(o.DateTime) = " + year
+            "SELECT o.dateTime AS date, o.numShares AS numShares, o.accountNumber AS accountNumber, " +
+            "s.sharePrice AS pricePerShare, o.stockSymbol AS stockSymbol " +
+            "FROM orders o JOIN stock s ON o.stockSymbol = s.stockSymbol " +
+            "WHERE MONTH(o.dateTime) = " + month + " AND YEAR(o.dateTime) = " + year
         );
         while (rs.next()) {
             RevenueItem item = new RevenueItem();
@@ -76,21 +76,21 @@ public List<RevenueItem> getSummaryListing(String searchKeyword) {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         rs = st.executeQuery(
-            "SELECT o.DateTime AS date, o.NumberOfShares AS numShares, o.AccountNumber AS accountId, " +
-            "s.SharePrice AS pricePerShare, o.StockSymbol AS stockSymbol " +
-            "FROM Orders o " +
-            "JOIN Stock s ON o.StockSymbol = s.StockSymbol " +
-            "JOIN Account a ON o.AccountNumber = a.AccountNumber " +
-            "JOIN Customers c ON a.CustomerID = c.CustomerID " +
-            "WHERE o.StockSymbol = '" + searchKeyword + "' " +
-            "OR s.StockType = '" + searchKeyword + "' " +
-            "OR c.LastName = '" + searchKeyword + "'"
+            "SELECT o.dateTime AS date, o.numberOfShares AS numShares, o.accountNumber AS accountId, " +
+            "s.sharePrice AS pricePerShare, o.stockSymbol AS stockSymbol " +
+            "FROM orders o " +
+            "JOIN stock s ON o.stockSymbol = s.stockSymbol " +
+            "JOIN accounts a ON o.accountNumber = a.accountNumber " +
+            "JOIN customer c ON a.customerID = c.customerID " +
+            "WHERE o.atockSymbol = '" + searchKeyword + "' " +
+            "OR s.stockType = '" + searchKeyword + "' " +
+            "OR c.lastName = '" + searchKeyword + "'"
         );
         while (rs.next()) {
             RevenueItem item = new RevenueItem();
             item.setDate(rs.getDate("date"));
             item.setNumShares(rs.getInt("numShares"));
-            item.setAccountId(rs.getString("accountId"));
+            item.setAccountId(rs.getString("accountID"));
             item.setPricePerShare(rs.getDouble("pricePerShare"));
             item.setStockSymbol(rs.getString("stockSymbol"));
             item.setAmount(item.getNumShares() * item.getPricePerShare());
