@@ -34,11 +34,11 @@ VALUES
 ('F', 'Ford', 'automotive', 9.00, 750);
 
 -- Insert Orders
-INSERT INTO orders (orderID, accountNum, employeeID, stockSymbol, orderType, numShares, dateTime, transactionFee, priceType)
+INSERT INTO orders (orderID, accountNum, employeeID, stockSymbol, orderType, numShares, dateTime, transactionFee, priceType, percentage, pricePerShare)
 VALUES 
-(1, 1, 123456789, 'GM', 'buy', 75, '2025-04-01 10:30:00', 0.00, 'market'),
-(2, 2, 123456789, 'IBM', 'sell', 10, '2025-04-02 14:15:00', 0.00, 'trailing stop 10%'),
-(3, 2, 123456789, 'IBM', 'sell', 10, '2025-04-03 09:45:00', 0.00, '$90');
+(1, 1, 123456789, 'GM', 'buy', 75, '2025-04-01 10:30:00', 0.00, 'market', NULL, NULL),
+(2, 2, 123456789, 'IBM', 'sell', 10, '2025-04-02 14:15:00', 0.00, 'trailing stop', 15, NULL),
+(3, 2, 123456789, 'IBM', 'sell', 10, '2025-04-03 09:45:00', 0.00, 'market on close', NULL, NULL);
 
 -- Insert Login Data
 INSERT INTO login (username, password, role)
