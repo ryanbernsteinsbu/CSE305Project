@@ -52,7 +52,7 @@ public class CustomerDao {
 
 
     public String addCustomer(Customer customer) {
-        final String sql = "INSERT INTO customer (id, first_name, last_name, email, address, city, state, zip_code, telephone, credit_card, rating) " +
+        final String sql = "INSERT INTO customer (customerID, firstName, lastName, email, address, city, state, zipCode, telephone, creditCard, rating) " +
                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -77,7 +77,7 @@ public class CustomerDao {
     }
 
     public String editCustomer(Customer customer) {
-        final String sql = "UPDATE customer SET first_name = ?, last_name = ?, email = ?, address = ?, city = ?, state = ?, zip_code = ?, telephone = ?, credit_card = ?, rating = ? WHERE id = ?";
+        final String sql = "UPDATE customer SET firstName = ?, lastName = ?, email = ?, address = ?, city = ?, state = ?, zipCode = ?, telephone = ?, creditCard = ?, rating = ? WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -115,7 +115,7 @@ public class CustomerDao {
 
     public List<Customer> getCustomers(String searchKeyword) {
         final String keyword = (searchKeyword == null || searchKeyword.isBlank()) ? "%" : ("%" + searchKeyword + "%");
-        final String sql = "SELECT * FROM customer WHERE first_name LIKE ? OR last_name LIKE ? OR email LIKE ?";
+        final String sql = "SELECT * FROM customer WHERE firstName LIKE ? OR lastName LIKE ? OR email LIKE ?";
         List<Customer> list = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -197,7 +197,7 @@ public class CustomerDao {
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getString("id");
+                    return rs.getString("customerID");
                 }
             }
         } catch (SQLException ex) {
