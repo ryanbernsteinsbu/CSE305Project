@@ -84,13 +84,14 @@ public class OrderDao {
 		 * Student code to place stock order
 		 * Employee can be null, when the order is placed directly by Customer
          * */
+	    
     Connection con = null;
     Statement  st  = null;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
-
+	
         // Base fields
         int    id        = order.getId();
         Timestamp ts     = new Timestamp(order.getDatetime().getTime());
@@ -123,7 +124,7 @@ public class OrderDao {
 
         // Build and execute INSERT
         String sql = ""
-          + "INSERT INTO Orders "
+          + "INSERT INTO orders "
           + "(orderID, dateTime, numShares, orderType, customerID, employeeID, buySellType, hiddenStop, trailPercent) VALUES ("
           +   id + ", '"
           +   ts.toString() + "', "
@@ -203,9 +204,9 @@ public class OrderDao {
         st  = con.createStatement();
         String sql =
             "SELECT o.id,o.datetime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
-            "FROM Orders o " +
-            "JOIN Account a ON o.accountNumber=a.accountId " +
-            "JOIN Customers c ON a.customerId=c.customerId " +
+            "FROM orders o " +
+            "JOIN accounts a ON o.accountNumber=a.accountId " +
+            "JOIN customers c ON a.customerId=c.customerId " +
             "WHERE c.lastName='" + customerName + "'";
         rs = st.executeQuery(sql);
         while (rs.next()) {
@@ -254,8 +255,8 @@ public class OrderDao {
         st  = con.createStatement();
         String sql =
             "SELECT o.id,o.datetime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
-            "FROM Orders o " +
-            "JOIN Account a ON o.accountNumber=a.accountId " +
+            "FROM orders o " +
+            "JOIN accounts a ON o.accountNumber=a.accountId " +
             "WHERE a.customerId='" + customerId + "'";
         rs = st.executeQuery(sql);
         while (rs.next()) {
@@ -304,7 +305,7 @@ public class OrderDao {
         st  = con.createStatement();
         String sql =
             "SELECT o.id, o.stockSymbol, o.datetime, o.orderType, o.hiddenStop, o.trailPercent, s.sharePrice " +
-            "FROM Orders o JOIN Stock s ON o.stockSymbol = s.StockSymbol " +
+            "FROM orders o JOIN stock s ON o.stockSymbol = s.StockSymbol " +
             "WHERE o.id = " + orderId;
         rs = st.executeQuery(sql);
         while (rs.next()) {
