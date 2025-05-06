@@ -1,5 +1,8 @@
 package model;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+
 public class Employee extends Person {
 	
 	/*
@@ -7,28 +10,28 @@ public class Employee extends Person {
 	 * Each instance variable has a corresponding getter and setter
 	 */
 
-	public String getEmployeeID() {
+	public long getEmployeeID() {
 		return employeeID;
 	}
 
-	public void setEmployeeID(String employeeID) {
-		this.employeeID = employeeID;
+	public void setEmployeeID(long l) {
+		this.employeeID = l;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setStartDate(Date date) {
+		this.startDate = date;
 	}
 
-	public float getHourlyRate() {
+	public BigDecimal getHourlyRate() {
 		return hourlyRate;
 	}
 
-	public void setHourlyRate(float hourlyRate) {
-		this.hourlyRate = hourlyRate;
+	public void setHourlyRate(BigDecimal bigDecimal) {
+		this.hourlyRate = bigDecimal;
 	}
 
 	public String getLevel() {
@@ -39,9 +42,9 @@ public class Employee extends Person {
 		this.level = level;
 	}
 
-	private String employeeID;
-	private String startDate;
-	private float hourlyRate;
+	private long employeeID;
+	private Date startDate;
+	private BigDecimal hourlyRate;
 	private String level;
 
 

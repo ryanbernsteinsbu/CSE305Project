@@ -1,236 +1,117 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Customer;
 import model.Location;
 
 public class CustomerDao {
 
-	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/CSE305";
-    private static final String JDBC_USER     = "root";
-    private static final String JDBC_PASSWORD = "root";
+    private static final String URL  = "jdbc:mysql://localhost:3306/CSE305";
+    private static final String USER = "root";
+    private static final String PASS = "root";
 
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new ExceptionInInitializerError("MySQL JDBC driver not found; add it to the class‑path");
+
+    public int add(Customer c) throws SQLException {
+        String q = """
+            INSERT INTO customers
+            (customerID, firstName, lastName, address, city, state, zipCode,
+             telephone, email, accountCreationDate, creditCard, rating)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""";
+        try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement ps = cn.prepareStatement(q)) {
+
+            ps.setLong  (1,  c.getCustomerID());
+            ps.setString(2,  c.getFirstName());
+            ps.setString(3,  c.getLastName());
+            ps.setString(4,  c.getAddress());
+            ps.setString(5,  c.getLocation().getCity());
+            ps.setString(6,  c.getLocation().getState());
+            ps.setLong(7,  c.getLocation().getZipCode());
+            ps.setString(8,  c.getTelephone());
+            ps.setString(9,  c.getEmail());
+            ps.setDate  (10, new java.sql.Date(c.getAccountCreationDate().getTime()));
+            ps.setString(11, c.getCreditCard());
+            ps.setInt   (12, c.getRating());
+            return ps.executeUpdate();           // 1 = success, 0 = fail
         }
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+    public int update(Customer c) throws SQLException {
+        String q = """
+            UPDATE customers SET firstName=?, lastName=?, address=?, city=?, state=?, zipCode=?,
+                                 telephone=?, email=?, creditCard=?, rating=?
+            WHERE customerID=?""";
+        try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement ps = cn.prepareStatement(q)) {
+
+            ps.setString(1,  c.getFirstName());
+            ps.setString(2,  c.getLastName());
+            ps.setString(3,  c.getAddress());
+            ps.setString(4,  c.getLocation().getCity());
+            ps.setString(5,  c.getLocation().getState());
+            ps.setLong(6,  c.getLocation().getZipCode());
+            ps.setString(7,  c.getTelephone());
+            ps.setString(8,  c.getEmail());
+            ps.setString(9,  c.getCreditCard());
+            ps.setInt   (10, c.getRating());
+            ps.setLong  (11, c.getCustomerID());
+            return ps.executeUpdate();
+        }
     }
 
-    private Customer mapRow(ResultSet rs) throws SQLException {
-        Customer c   = new Customer();
-        Location loc = new Location();
+    public int delete(long id) throws SQLException {
+        try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM customers WHERE customerID=?")) {
+            ps.setLong(1, id);
+            return ps.executeUpdate();
+        }
+    }
 
-        c.setId(rs.getString("id"));
-        c.setFirstName(rs.getString("first_name"));
-        c.setLastName(rs.getString("last_name"));
-        c.setEmail(rs.getString("email"));
-        c.setAddress(rs.getString("address"));
-        c.setTelephone(rs.getString("telephone"));
-        c.setCreditCard(rs.getString("credit_card"));
-        c.setRating(rs.getInt("rating"));
+    public Customer find(long id) throws SQLException {
+        try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM customers WHERE customerID=?")) {
+            ps.setLong(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? map(rs) : null;
+            }
+        }
+    }
 
-        loc.setCity(rs.getString("city"));
-        loc.setState(rs.getString("state"));
-        loc.setZipCode(rs.getInt("zip_code"));
-        c.setLocation(loc);
+    public List<Customer> search(String keyword) throws SQLException {
+        String like = "%" + (keyword == null ? "" : keyword) + "%";
+        String q = "SELECT * FROM customers WHERE firstName LIKE ? OR lastName LIKE ? OR email LIKE ?";
+        try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement ps = cn.prepareStatement(q)) {
 
+            ps.setString(1, like); ps.setString(2, like); ps.setString(3, like);
+            ResultSet rs = ps.executeQuery();
+            List<Customer> list = new ArrayList<>();
+            while (rs.next()) list.add(map(rs));
+            return list;
+        }
+    }
+
+    private Customer map(ResultSet r) throws SQLException {
+        Customer c = new Customer();
+        Location  l = new Location();
+
+        c.setCustomerID(r.getLong("customerID"));
+        c.setFirstName (r.getString("firstName"));
+        c.setLastName  (r.getString("lastName"));
+        c.setAddress   (r.getString("address"));
+
+        l.setCity  (r.getString("city"));
+        l.setState (r.getString("state"));
+        l.setZipCode(r.getString("zipCode"));
+        c.setLocation(l);
+
+        c.setTelephone (r.getString("telephone"));
+        c.setEmail     (r.getString("email"));
+        c.setAccountCreationDate(r.getDate("accountCreationDate"));
+        c.setCreditCard(r.getString("creditCard"));
+        c.setRating    (r.getInt("rating"));
         return c;
     }
-
-
-    public String addCustomer(Customer customer) {
-        final String sql = "INSERT INTO customer (customerID, firstName, lastName, email, address, city, state, zipCode, telephone, creditCard, rating) " +
-                           "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, customer.getId());
-            ps.setString(2, customer.getFirstName());
-            ps.setString(3, customer.getLastName());
-            ps.setString(4, customer.getEmail());
-            ps.setString(5, customer.getAddress());
-            ps.setString(6, customer.getLocation().getCity());
-            ps.setString(7, customer.getLocation().getState());
-            ps.setInt   (8, customer.getLocation().getZipCode());
-            ps.setString(9, customer.getTelephone());
-            ps.setString(10, customer.getCreditCard());
-            ps.setInt   (11, customer.getRating());
-
-            return ps.executeUpdate() == 1 ? "success" : "failure";
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return "failure";
-        }
-    }
-
-    public String editCustomer(Customer customer) {
-        final String sql = "UPDATE customer SET firstName = ?, lastName = ?, email = ?, address = ?, city = ?, state = ?, zipCode = ?, telephone = ?, creditCard = ?, rating = ? WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, customer.getFirstName());
-            ps.setString(2, customer.getLastName());
-            ps.setString(3, customer.getEmail());
-            ps.setString(4, customer.getAddress());
-            ps.setString(5, customer.getLocation().getCity());
-            ps.setString(6, customer.getLocation().getState());
-            ps.setInt   (7, customer.getLocation().getZipCode());
-            ps.setString(8, customer.getTelephone());
-            ps.setString(9, customer.getCreditCard());
-            ps.setInt   (10, customer.getRating());
-            ps.setString(11, customer.getId());
-
-            return ps.executeUpdate() == 1 ? "success" : "failure";
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return "failure";
-        }
-    }
-
-    public String deleteCustomer(String customerID) {
-        final String sql = "DELETE FROM customer WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, customerID);
-            return ps.executeUpdate() == 1 ? "success" : "failure";
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return "failure";
-        }
-    }
-
-    public List<Customer> getCustomers(String searchKeyword) {
-        final String keyword = (searchKeyword == null || searchKeyword.isBlank()) ? "%" : ("%" + searchKeyword + "%");
-        final String sql = "SELECT * FROM customer WHERE firstName LIKE ? OR lastName LIKE ? OR email LIKE ?";
-        List<Customer> list = new ArrayList<>();
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, keyword);
-            ps.setString(2, keyword);
-            ps.setString(3, keyword);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    list.add(mapRow(rs));
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return list;
-    }
-
-    public Customer getCustomer(String customerID) {
-        final String sql = "SELECT * FROM customer WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, customerID);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return mapRow(rs);
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public Customer getHighestRevenueCustomer() {
-        final String sql = "SELECT c.*, SUM(o.total) AS revenue " +
-                           "FROM customer c JOIN orders o ON c.id = o.customer_id " +
-                           "GROUP BY c.id ORDER BY revenue DESC LIMIT 1";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            if (rs.next()) {
-                return mapRow(rs);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<Customer> getCustomerMailingList() {
-        final String sql = "SELECT * FROM customer";
-        List<Customer> list = new ArrayList<>();
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                list.add(mapRow(rs));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return list;
-    }
-
-    public List<Customer> getAllCustomers() {
-        return getCustomerMailingList();
-    }
-
-    public String getCustomerID(String email) {
-        final String sql = "SELECT id FROM customer WHERE email = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, email);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getString("customerID");
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-	public Customer getDummyCustomer() {
-		Location location = new Location();
-		location.setZipCode(11790);
-		location.setCity("Stony Brook");
-		location.setState("NY");
-
-		Customer customer = new Customer();
-		customer.setId("111-11-1111");
-		customer.setAddress("123 Success Street");
-		customer.setLastName("Lu");
-		customer.setFirstName("Shiyong");
-		customer.setEmail("shiyong@cs.sunysb.edu");
-		customer.setLocation(location);
-		customer.setTelephone("5166328959");
-		customer.setCreditCard("1234567812345678");
-		customer.setRating(1);
-
-		return customer;
-	}
-
-	public List<Customer> getDummyCustomerList() {
-		List<Customer> customers = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			customers.add(getDummyCustomer());
-		}
-		return customers;
-	}
 }

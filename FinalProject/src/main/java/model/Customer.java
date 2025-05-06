@@ -54,4 +54,24 @@ public class Customer extends Person{
     public void setAccountCreationTime(String accountCreationTime) {
         this.accountCreationTime = accountCreationTime;
     }
+
+	public void setCustomerID(long long1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setAccountCreationDate(java.sql.Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public long getCustomerID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Date getAccountCreationDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
