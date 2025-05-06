@@ -154,7 +154,7 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         String sql =
-            "SELECT o.orderID, o.datetime, o.numShares, o.orderType, o.accountNumber, o.employeeID, o.buySellType, o.hiddenStop, o.trailPercent " +
+            "SELECT o.orderID, o.dateTime, o.numShares, o.orderType, o.accountNumber, o.employeeID, o.buySellType, o.hiddenStop, o.trailPercent " +
             "FROM orders o " +
             "WHERE o.stockSymbol = '" + stockSymbol + "'";
         rs = st.executeQuery(sql);
@@ -203,7 +203,7 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.id,o.datetime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
+            "SELECT o.orderID,o.dateTime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
             "FROM orders o " +
             "JOIN accounts a ON o.accountNumber=a.accountId " +
             "JOIN customers c ON a.customerId=c.customerId " +
@@ -254,7 +254,7 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.id,o.datetime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
+            "SELECT o.orderID,o.dateTime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
             "FROM orders o " +
             "JOIN accounts a ON o.accountNumber=a.accountId " +
             "WHERE a.customerId='" + customerId + "'";
@@ -304,9 +304,9 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.id, o.stockSymbol, o.datetime, o.orderType, o.hiddenStop, o.trailPercent, s.sharePrice " +
+            "SELECT o.orderID, o.stockSymbol, o.dateTime, o.orderType, o.hiddenStop, o.trailPercent, s.sharePrice " +
             "FROM orders o JOIN stock s ON o.stockSymbol = s.StockSymbol " +
-            "WHERE o.id = " + orderId;
+            "WHERE o.orderID = " + orderId;
         rs = st.executeQuery(sql);
         while (rs.next()) {
             OrderPriceEntry e = new OrderPriceEntry();
