@@ -36,71 +36,69 @@ public class SalesDao {
     }
     
     public List<RevenueItem> getSalesReport(String month, String year) {
-
-		/*
-		 * The students code to fetch data from the database will be written here
-		 * Query to get sales report for a particular month and year
-		 */
-
-    	List<RevenueItem> items = new ArrayList<RevenueItem>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT so.DateTime AS date, so.NumberOfShares AS numShares, so.AccountNumber AS accountId, s.SharePrice AS pricePerShare, so.StockSymbol AS stockSymbol " +
-                "FROM StockOrder so JOIN Stock s ON so.StockSymbol=s.StockSymbol " +
-                "WHERE MONTH(so.DateTime)=" + month + " AND YEAR(so.DateTime)=" + year
-            );
-            while (rs.next()) {
-                RevenueItem item = new RevenueItem();
-                item.setDate(rs.getDate("date"));
-                item.setNumShares(rs.getInt("numShares"));
-                item.setAccountId(rs.getString("accountId"));
-                item.setPricePerShare(rs.getDouble("pricePerShare"));
-                item.setStockSymbol(rs.getString("stockSymbol"));
-                item.setAmount(rs.getInt("numShares") * rs.getDouble("pricePerShare"));
-                items.add(item);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+    List<RevenueItem> items = new ArrayList<>();
+    Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st = con.createStatement();
+        rs = st.executeQuery(
+            "SELECT o.DateTime AS date, o.NumberOfShares AS numShares, o.AccountNumber AS accountId, " +
+            "s.SharePrice AS pricePerShare, o.StockSymbol AS stockSymbol " +
+            "FROM Orders o JOIN Stock s ON o.StockSymbol = s.StockSymbol " +
+            "WHERE MONTH(o.DateTime) = " + month + " AND YEAR(o.DateTime) = " + year
+        );
+        while (rs.next()) {
+            RevenueItem item = new RevenueItem();
+            item.setDate(rs.getDate("date"));
+            item.setNumShares(rs.getInt("numShares"));
+            item.setAccountId(rs.getString("accountId"));
+            item.setPricePerShare(rs.getDouble("pricePerShare"));
+            item.setStockSymbol(rs.getString("stockSymbol"));
+            item.setAmount(item.getNumShares() * item.getPricePerShare());
+            items.add(item);
         }
-        return items;
+    } catch (Exception e) {
+        System.out.println(e);
     }
+    return items;
+}
 
-
-
-    public List<RevenueItem> getSummaryListing(String searchKeyword) {
-
-    	List<RevenueItem> items = new ArrayList<RevenueItem>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT so.DateTime AS date, so.NumberOfShares AS numShares, so.AccountNumber AS accountId, s.SharePrice AS pricePerShare, so.StockSymbol AS stockSymbol " +
-                "FROM StockOrder so JOIN Stock s ON so.StockSymbol=s.StockSymbol JOIN Account a ON so.AccountNumber=a.AccountNumber JOIN Customers c ON a.CustomerID=c.CustomerID " +
-                "WHERE so.StockSymbol='" + searchKeyword + "' OR s.StockType='" + searchKeyword + "' OR c.LastName='" + searchKeyword + "'"
-            );
-            while (rs.next()) {
-                RevenueItem item = new RevenueItem();
-                item.setDate(rs.getDate("date"));
-                item.setNumShares(rs.getInt("numShares"));
-                item.setAccountId(rs.getString("accountId"));
-                item.setPricePerShare(rs.getDouble("pricePerShare"));
-                item.setStockSymbol(rs.getString("stockSymbol"));
-                item.setAmount(rs.getInt("numShares") * rs.getDouble("pricePerShare"));
-                items.add(item);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+public List<RevenueItem> getSummaryListing(String searchKeyword) {
+    List<RevenueItem> items = new ArrayList<>();
+    Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(URL, USER, PASSWORD);
+        st = con.createStatement();
+        rs = st.executeQuery(
+            "SELECT o.DateTime AS date, o.NumberOfShares AS numShares, o.AccountNumber AS accountId, " +
+            "s.SharePrice AS pricePerShare, o.StockSymbol AS stockSymbol " +
+            "FROM Orders o " +
+            "JOIN Stock s ON o.StockSymbol = s.StockSymbol " +
+            "JOIN Account a ON o.AccountNumber = a.AccountNumber " +
+            "JOIN Customers c ON a.CustomerID = c.CustomerID " +
+            "WHERE o.StockSymbol = '" + searchKeyword + "' " +
+            "OR s.StockType = '" + searchKeyword + "' " +
+            "OR c.LastName = '" + searchKeyword + "'"
+        );
+        while (rs.next()) {
+            RevenueItem item = new RevenueItem();
+            item.setDate(rs.getDate("date"));
+            item.setNumShares(rs.getInt("numShares"));
+            item.setAccountId(rs.getString("accountId"));
+            item.setPricePerShare(rs.getDouble("pricePerShare"));
+            item.setStockSymbol(rs.getString("stockSymbol"));
+            item.setAmount(item.getNumShares() * item.getPricePerShare());
+            items.add(item);
         }
-        return items;
+    } catch (Exception e) {
+        System.out.println(e);
     }
+    return items;
+}
 }
