@@ -1,109 +1,48 @@
-    CREATE TABLE customers (
-        customerID BIGINT NOT NULL,
-        firstName VARCHAR(50) NOT NULL,
-        lastName VARCHAR(50) NOT NULL,
-        address VARCHAR(100),
-        city VARCHAR(50),
-        state VARCHAR(20),
-        zipCode VARCHAR(10),
-        telephone VARCHAR(20),
-        email VARCHAR(100),
-        accountCreationDate DATE NOT NULL,
-        creditCard VARCHAR(25),
-        rating INT,
-        CHECK (rating >= 1 AND rating <= 5),
-        CONSTRAINT PK_Customers PRIMARY KEY (customerID)
-    );
+-- Insert Customers
+INSERT INTO customers (customerID, firstName, lastName, address, city, state, zipCode, telephone, email, accountCreationDate, creditCard, rating)
+VALUES 
+(111111111, 'Shang', 'Yang', '123 Success Street', 'Stony Brook', 'NY', '11790', '516-632-8959', 'syang@cs.sunysb.edu', '2006-01-01', '1234567812345678', 1),
+(222222222, 'Victor', 'Du', '456 Fortune Road', 'Stony Brook', 'NY', '11790', '516-632-4360', 'vicdu@cs.sunysb.edu', '2006-02-15', '5678123456781234', 1),
+(333333333, 'John', 'Smith', '789 Peace Blvd.', 'Los Angeles', 'CA', '93536', '315-443-4321', 'jsmith@ic.sunysb.edu', '2006-03-10', '2345678923456789', 1),
+(444444444, 'Lewis', 'Philip', '135 Knowledge Lane', 'Stony Brook', 'NY', '11794', '516-666-8888', 'pml@cs.sunysb.edu', '2006-04-05', '6789234567892345', 1);
 
-    CREATE TABLE employee (
-        employeeID BIGINT NOT NULL,
-        firstName VARCHAR(50) NOT NULL,
-        lastName VARCHAR(50) NOT NULL,
-        address VARCHAR(100),
-        city VARCHAR(50),
-        state VARCHAR(20),
-        zipCode VARCHAR(10),
-        telephone VARCHAR(20),
-        startDate DATE NOT NULL,
-        hourlyRate DECIMAL(7,2) NOT NULL,
-        SSN VARCHAR(11),
-        CHECK (hourlyRate >= 0),
-        CONSTRAINT PK_Employee PRIMARY KEY (employeeID)
-    );
+-- Insert Accounts
+INSERT INTO accounts (accountNum, customerID)
+VALUES 
+(1, 444444444),
+(2, 222222222);
 
-    CREATE TABLE manager (
-        managerID BIGINT NOT NULL,
-        employeeID BIGINT NOT NULL,
-        CONSTRAINT PK_Manager PRIMARY KEY (managerID),
-        CONSTRAINT FK_Manager_Employee FOREIGN KEY (employeeID)
-            REFERENCES employee (employeeID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
-    );
+-- Insert Employees
+INSERT INTO employee (employeeID, firstName, lastName, address, city, state, zipCode, telephone, startDate, hourlyRate, SSN)
+VALUES 
+(123456789, 'David', 'Smith', '123 College road', 'Stony Brook', 'NY', '11790', '516-215-2345', '2005-11-01', 60.00, '123-45-6789'),
+(789123456, 'David', 'Warren', '456 Sunken Street', 'Stony Brook', 'NY', '11794', '631-632-9987', '2006-02-02', 50.00, '789-12-3456');
 
-    CREATE TABLE customerRep (
-        repID BIGINT NOT NULL,
-        employeeID BIGINT NOT NULL,
-        CONSTRAINT PK_CustomerRep PRIMARY KEY (repID),
-        CONSTRAINT FK_CustomerRep_Employee FOREIGN KEY (employeeID)
-            REFERENCES employee (employeeID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
-    );
+-- Insert Manager
+INSERT INTO manager (managerID, employeeID)
+VALUES (1, 789123456);
 
-    CREATE TABLE stock (
-        stockSymbol VARCHAR(10) NOT NULL,
-        stockName VARCHAR(100) NOT NULL,
-        stockType VARCHAR(50),
-        sharePrice DECIMAL(10,2) NOT NULL,
-        numShares BIGINT NOT NULL,
-        CHECK (numShares >= 0),
-        CHECK (sharePrice >= 0),
-        CONSTRAINT PK_Stock PRIMARY KEY (stockSymbol)
-    );
-    
-        CREATE TABLE accounts (
-        accountNum BIGINT NOT NULL,
-        customerID BIGINT NOT NULL,
-        CONSTRAINT PK_Account PRIMARY KEY (accountNum),
-        CONSTRAINT FK_Account_Customer FOREIGN KEY (customerID)
-            REFERENCES Customers (customerID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
-    );
-	
-    CREATE TABLE orders (
-        orderID BIGINT NOT NULL,
-        accountNum BIGINT NOT NULL,
-        employeeID BIGINT,
-        stockSymbol VARCHAR(10) NOT NULL,
-        orderType VARCHAR(20),
-        numShares INT NOT NULL,
-        dateTime DATETIME NOT NULL,
-        transactionFee DECIMAL(10,2),
-        priceType VARCHAR(20),
-        percentage INT,
-        pricePerShare INT,
-        CHECK (numShares >= 0),
-        CHECK (TransactionFee >= 0),
-        CONSTRAINT PK_StockOrder PRIMARY KEY (orderID),
-        CONSTRAINT FK_StockOrder_Account FOREIGN KEY (accountNum)
-            REFERENCES accounts (accountNum)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-        CONSTRAINT FK_StockOrder_Employee FOREIGN KEY (employeeID)
-            REFERENCES employee (employeeID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-        CONSTRAINT FK_StockOrder_Stock FOREIGN KEY (stockSymbol)
-            REFERENCES stock (stockSymbol)
-            ON DELETE NO ACTION
-            ON UPDATE CASCADE
-    );
-    
-	CREATE TABLE login (
-		username VARCHAR(50) NOT NULL,
-        password VARCHAR(50) NOT NULL,
-		role VARCHAR(50) NOT NULL
-    );
-    
+-- Insert Customer Representatives
+INSERT INTO customerRep (repID, employeeID)
+VALUES (1, 123456789);
+
+-- Insert Stocks
+INSERT INTO stock (stockSymbol, stockName, stockType, sharePrice, numShares)
+VALUES 
+('GM', 'General Motors', 'automotive', 34.23, 1000),
+('IBM', 'IBM', 'computer', 91.41, 500),
+('F', 'Ford', 'automotive', 9.00, 750);
+
+-- Insert Orders
+INSERT INTO orders (orderID, accountNum, employeeID, stockSymbol, orderType, numShares, dateTime, transactionFee, priceType, percentage, pricePerShare)
+VALUES 
+(1, 1, 123456789, 'GM', 'buy', 75, '2025-04-01 10:30:00', 0.00, 'market', NULL, NULL),
+(2, 2, 123456789, 'IBM', 'sell', 10, '2025-04-02 14:15:00', 0.00, 'trailing stop', 15, NULL),
+(3, 2, 123456789, 'IBM', 'sell', 10, '2025-04-03 09:45:00', 0.00, 'market on close', NULL, NULL);
+
+-- Insert Login Data
+INSERT INTO login (username, password, role, accountNum)
+VALUES 
+('lewis.p@cs.sunysb.edu', 'password123', 'customer', 1),
+('dsmith@cs.sunysb.edu', 'rep456', 'customerRepresentative', 1),
+('dwarren@cs.sunysb.edu', 'admin789', 'manager', 2);
