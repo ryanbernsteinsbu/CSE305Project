@@ -12,9 +12,9 @@ import java.util.List;
 
 public class OrderDao {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/your_db";
+	private static final String URL = "jdbc:mysql://localhost:3306/cse305?useSSL=false";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "12345";
     
     public Order getDummyTrailingStopOrder() {
         TrailingStopOrder order = new TrailingStopOrder();
