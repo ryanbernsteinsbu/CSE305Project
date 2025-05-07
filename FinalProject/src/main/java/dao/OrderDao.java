@@ -102,8 +102,8 @@ public class OrderDao {
         // Determine orderType and subclass‐specific columns
         String orderType    = "unknown";
         String buySellType  = "NULL";
-        String hiddenStop   = "NULL";
-        String trailPercent = "NULL";
+        String pricePerShare   = "NULL";
+        String percentage = "NULL";
 
         if (order instanceof MarketOrder) {
             orderType   = "market";
@@ -114,28 +114,30 @@ public class OrderDao {
             buySellType = "'" + ((MarketOnCloseOrder)order).getBuySellType() + "'";
         }
         else if (order instanceof HiddenStopOrder) {
-            orderType  = "hiddenStop";
-            hiddenStop = String.valueOf(((HiddenStopOrder)order).getPricePerShare());
+            orderType  = "pricePerShare";
+            pricePerShare = String.valueOf(((HiddenStopOrder)order).getPricePerShare());
         }
         else if (order instanceof TrailingStopOrder) {
             orderType    = "trailingStop";
-            trailPercent = String.valueOf(((TrailingStopOrder)order).getPercentage());
+            percentage = String.valueOf(((TrailingStopOrder)order).getPercentage());
         }
 
         // Build and execute INSERT
         String sql = ""
           + "INSERT INTO orders "
-          + "(orderID, dateTime, numShares, orderType, accountNum, employeeID, buySellType, hiddenStop, trailPercent) VALUES ("
+          + "(orderID, stockSymbol, dateTime, numShares, orderType, accountNum, employeeID, buySellType, pricePerShare, percentage) VALUES ("
           +   id + ", '"
+          +   stock.getSymbol() + "', '"
           +   ts.toString() + "', "
           +   shares + ", '"
 	  +   orderType + "', "	
-	  +   accountNumber + ", '"
-	  +   employeeID + ", '"
+	  +   accountNumber + ", "
+	  +   employeeID + ", "
           +   buySellType + ", "
-          +   hiddenStop + ", "
-          +   trailPercent
+          +   pricePerShare + ", "
+          +   percentage
           + ")";
+        System.out.println(customer.getFirstName());
         int rows = st.executeUpdate(sql);
         return rows > 0 ? "success" : "failure";
     } catch (Exception e) {
@@ -154,7 +156,7 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         String sql =
-            "SELECT o.orderID, o.dateTime, o.numShares, o.orderType, o.accountNumber, o.employeeID, o.buySellType, o.hiddenStop, o.trailPercent " +
+            "SELECT o.orderID, o.dateTime, o.numShares, o.orderType, o.accountNum, o.employeeID, o.buySellType, o.pricePerShare, o.percentage " +
             "FROM orders o " +
             "WHERE o.stockSymbol = '" + stockSymbol + "'";
         rs = st.executeQuery(sql);
@@ -169,13 +171,13 @@ public class OrderDao {
                 MarketOnCloseOrder m = new MarketOnCloseOrder();
                 m.setBuySellType(rs.getString("buySellType"));
                 o = m;
-            } else if ("hiddenStop".equals(type)) {
+            } else if ("pricePerShare".equals(type)) {
                 HiddenStopOrder h = new HiddenStopOrder();
-                h.setPricePerShare(rs.getDouble("hiddenStop"));
+                h.setPricePerShare(rs.getDouble("pricePerShare"));
                 o = h;
             } else if ("trailingStop".equals(type)) {
                 TrailingStopOrder t = new TrailingStopOrder();
-                t.setPercentage(rs.getDouble("trailPercent"));
+                t.setPercentage(rs.getDouble("percentage"));
                 o = t;
             } else {
                 MarketOrder m = new MarketOrder();
@@ -203,9 +205,9 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.orderID,o.dateTime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
+            "SELECT o.orderID,o.dateTime,o.numShares,o.orderType,o.buySellType,o.pricePerShare,o.percentage " +
             "FROM orders o " +
-            "JOIN accounts a ON o.accountNumber=a.accountId " +
+            "JOIN accounts a ON o.accountNum=a.accountNum " +
             "JOIN customers c ON a.customerId=c.customerId " +
             "WHERE c.lastName='" + customerName + "'";
         rs = st.executeQuery(sql);
@@ -220,13 +222,13 @@ public class OrderDao {
                 MarketOnCloseOrder m = new MarketOnCloseOrder();
                 m.setBuySellType(rs.getString("buySellType"));
                 o = m;
-            } else if ("hiddenStop".equals(type)) {
+            } else if ("pricePerShare".equals(type)) {
                 HiddenStopOrder h = new HiddenStopOrder();
-                h.setPricePerShare(rs.getDouble("hiddenStop"));
+                h.setPricePerShare(rs.getDouble("pricePerShare"));
                 o = h;
             } else if ("trailingStop".equals(type)) {
                 TrailingStopOrder t = new TrailingStopOrder();
-                t.setPercentage(rs.getDouble("trailPercent"));
+                t.setPercentage(rs.getDouble("percentage"));
                 o = t;
             } else {
                 MarketOrder m = new MarketOrder();
@@ -254,9 +256,9 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.orderID,o.dateTime,o.numShares,o.orderType,o.buySellType,o.hiddenStop,o.trailPercent " +
+            "SELECT o.orderID,o.dateTime,o.numShares,o.orderType,o.buySellType,o.pricePerShare,o.percentage " +
             "FROM orders o " +
-            "JOIN accounts a ON o.accountNumber=a.accountId " +
+            "JOIN accounts a ON o.accountNum=a.accountNum " +
             "WHERE a.customerId='" + customerId + "'";
         rs = st.executeQuery(sql);
         while (rs.next()) {
@@ -270,13 +272,13 @@ public class OrderDao {
                 MarketOnCloseOrder m = new MarketOnCloseOrder();
                 m.setBuySellType(rs.getString("buySellType"));
                 o = m;
-            } else if ("hiddenStop".equals(type)) {
+            } else if ("pricePerShare".equals(type)) {
                 HiddenStopOrder h = new HiddenStopOrder();
-                h.setPricePerShare(rs.getDouble("hiddenStop"));
+                h.setPricePerShare(rs.getDouble("pricePerShare"));
                 o = h;
             } else if ("trailingStop".equals(type)) {
                 TrailingStopOrder t = new TrailingStopOrder();
-                t.setPercentage(rs.getDouble("trailPercent"));
+                t.setPercentage(rs.getDouble("percentage"));
                 o = t;
             } else {
                 MarketOrder m = new MarketOrder();
@@ -304,7 +306,7 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.orderID, o.stockSymbol, o.dateTime, o.orderType, o.hiddenStop, o.trailPercent, s.sharePrice " +
+            "SELECT o.orderID, o.stockSymbol, o.dateTime, o.orderType, o.pricePerShare, o.percentage, s.sharePrice " +
             "FROM orders o JOIN stock s ON o.stockSymbol = s.StockSymbol " +
             "WHERE o.orderID = " + orderId;
         rs = st.executeQuery(sql);
@@ -316,11 +318,11 @@ public class OrderDao {
             double sharePrice  = rs.getDouble("sharePrice");
             e.setPricePerShare ( sharePrice );
             String type        = rs.getString("orderType");
-            if ("hiddenStop".equals(type)) {
-                e.setPrice(rs.getDouble("hiddenStop"));
+            if ("pricePerShare".equals(type)) {
+                e.setPrice(rs.getDouble("pricePerShare"));
             }
             else if ("trailingStop".equals(type)) {
-                double pct = rs.getDouble("trailPercent");
+                double pct = rs.getDouble("percentage");
                 e.setPrice(sharePrice * (1 - pct/100.0));
             }
             else {
