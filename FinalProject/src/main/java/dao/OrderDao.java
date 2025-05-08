@@ -92,11 +92,10 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
 	
-        // Base fields
         int    id        = order.getId();
         Timestamp ts     = new Timestamp(order.getDatetime().getTime());
         int    shares    = order.getNumShares();
-	int    accountNumber = customer.getAccountNumber();
+        int    accountNumber = customer.getAccountNumber();
         String employeeID    = (employee != null ? "'" + employee.getEmployeeID() + "'" : "NULL");
 
         // Determine orderType and subclass‐specific columns
@@ -184,8 +183,8 @@ public class OrderDao {
                 m.setBuySellType(rs.getString("buySellType"));
                 o = m;
             }
-            o.setId(rs.getInt("id"));
-            o.setDatetime(rs.getTimestamp("datetime"));
+            o.setId(rs.getInt("orderID"));
+            o.setDatetime(rs.getTimestamp("dateTime"));
             o.setNumShares(rs.getInt("numShares"));
             orders.add(o);
         }
@@ -235,8 +234,8 @@ public class OrderDao {
                 m.setBuySellType(rs.getString("buySellType"));
                 o = m;
             }
-            o.setId(rs.getInt("id"));
-            o.setDatetime(rs.getTimestamp("datetime"));
+            o.setId(rs.getInt("orderID"));
+            o.setDatetime(rs.getTimestamp("dateTime"));
             o.setNumShares(rs.getInt("numShares"));
             orders.add(o);
         }
@@ -285,8 +284,8 @@ public class OrderDao {
                 m.setBuySellType(rs.getString("buySellType"));
                 o = m;
             }
-            o.setId(rs.getInt("id"));
-            o.setDatetime(rs.getTimestamp("datetime"));
+            o.setId(rs.getInt("orderID"));
+            o.setDatetime(rs.getTimestamp("dateTime"));
             o.setNumShares(rs.getInt("numShares"));
             orders.add(o);
         }
@@ -312,8 +311,8 @@ public class OrderDao {
         rs = st.executeQuery(sql);
         while (rs.next()) {
             OrderPriceEntry e = new OrderPriceEntry();
-            e.setOrderId       ( rs.getString("id") );
-            e.setDate          ( rs.getTimestamp("datetime") );
+            e.setOrderId       ( rs.getString("orderID") );
+            e.setDate          ( rs.getTimestamp("dateTime") );
             e.setStockSymbol   ( rs.getString("stockSymbol") );
             double sharePrice  = rs.getDouble("sharePrice");
             e.setPricePerShare ( sharePrice );
