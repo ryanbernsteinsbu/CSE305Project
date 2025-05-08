@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Employee extends Person {
-	
+
 	/*
-	 * This class is a representation of the employee table in the database
-	 * Each instance variable has a corresponding getter and setter
+	 * This class is a representation of the employee table in the database Each
+	 * instance variable has a corresponding getter and setter
 	 */
 
 	public long getEmployeeID() {
@@ -42,11 +42,21 @@ public class Employee extends Person {
 		this.level = level;
 	}
 
+	public void setStartDate(String iso) {
+		this.startDate = java.sql.Date.valueOf(iso);
+	}
+
+	public void setHourlyRate(float f) {
+		this.hourlyRate = java.math.BigDecimal.valueOf(f);
+	}
+
+	public void setEmployeeID(String s) {
+		this.employeeID = Long.parseLong(s);
+	}
+
 	private long employeeID;
 	private Date startDate;
 	private BigDecimal hourlyRate;
 	private String level;
-
-
 
 }

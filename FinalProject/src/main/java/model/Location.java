@@ -1,31 +1,40 @@
 package model;
 
 public class Location {
+
+	private String zipCode;
 	private String city;
 	private String state;
-	private int zipCode;
 
-	public String getCity() {
-		return city;
+	public void setZipCode(int zip) {
+		this.zipCode = String.valueOf(zip);
+	}
+
+	public void setZipCode(String zip) {
+		this.zipCode = zip;
 	}
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public String getState() {
-		return state;
-	}
-
 	public void setState(String state) {
 		this.state = state;
 	}
 
-	public int getZipCode() {
+	public String getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(String string) {
-		this.zipCode = string;
+	public int getZipCodeInt() {
+		return Integer.parseInt(zipCode);
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getState() {
+		return state;
 	}
 }
