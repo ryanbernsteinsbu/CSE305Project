@@ -1,214 +1,251 @@
 package dao;
 
-import model.Customer;
-import model.Location;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.Customer;
+import model.Location;
 
 public class CustomerDao {
 
 	private static final String URL = "jdbc:mysql://localhost:3306/CSE305?useSSL=false";
 	private static final String USER = "root";
-	private static final String PASS = "root";
-	static {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+	private static final String PASS = "12345";
 
 	public String addCustomer(Customer c) {
-		return tryUpdate(() -> insert(c));
+	    String custQ = "INSERT INTO customers (customerID, firstName, lastName, address, city, state, zipCode, telephone, email, accountCreationDate, creditCard, rating) "
+	                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+	    String acctQ = "INSERT INTO accounts (accountNum, customerID) VALUES (?,?)";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement psCust = cn.prepareStatement(custQ);
+	         PreparedStatement psAcct = cn.prepareStatement(acctQ)) {
+
+	        // Insert into customers
+	        long custId = Long.parseLong(c.getClientId());
+	        psCust.setLong(1, custId);
+	        psCust.setString(2, c.getFirstName());
+	        psCust.setString(3, c.getLastName());
+	        psCust.setString(4, c.getAddress());
+	        psCust.setString(5, c.getLocation().getCity());
+	        psCust.setString(6, c.getLocation().getState());
+	        psCust.setString(7, String.valueOf(c.getLocation().getZipCode()));
+	        psCust.setString(8, c.getTelephone());
+	        psCust.setString(9, c.getEmail());
+	        psCust.setDate(10, java.sql.Date.valueOf(c.getAccountCreationTime()));
+	        psCust.setString(11, c.getCreditCard());
+	        psCust.setInt(12, c.getRating());
+
+	        if (psCust.executeUpdate() <= 0) {
+	            return "failure";
+	        }
+
+	        // Insert into accounts (using same ID for accountNum)
+	        psAcct.setLong(1, custId);
+	        psAcct.setLong(2, custId);
+	        psAcct.executeUpdate();
+
+	        // store accountNum in Customer model for later use
+	        c.setAccountNumber((int) (custId));
+	        return "success";
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return "failure";
+	    }
 	}
 
-	public String editCustomer(Customer c) {
-		return tryUpdate(() -> update(c));
+	public String editCustomer(Customer c){
+		String q = "UPDATE customers SET firstName=?, lastName=?, address=?, city=?, state=?, zipCode=?, telephone=?, email=?, creditCard=?, rating=? WHERE customerID=?";
+		try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+				PreparedStatement ps = cn.prepareStatement(q)) {
+
+			ps.setString(1, c.getFirstName());
+			ps.setString(2, c.getLastName());
+			ps.setString(3, c.getAddress());
+			ps.setString(4, c.getLocation().getCity());
+			ps.setString(5, c.getLocation().getState());
+			ps.setString (6, String.valueOf(c.getLocation().getZipCode()));
+			ps.setString(7, c.getTelephone());
+			ps.setString(8, c.getEmail());
+			ps.setString(9, c.getCreditCard());
+			ps.setInt(10, c.getRating());
+			ps.setLong(11, Long.parseLong(c.getClientId()));
+			return (ps.executeUpdate() > 0) ? "success" : "failure";
+		} catch (Exception e) {
+            e.printStackTrace();
+            return "failure";
+        }
 	}
 
-	public String deleteCustomer(String id) {
-		return tryUpdate(() -> delete(Long.parseLong(id)));
+	public String deleteCustomer(String id){
+		try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+				PreparedStatement ps = cn.prepareStatement("DELETE FROM customers WHERE customerID=?")) {
+			ps.setLong(1, Long.parseLong(id));
+			return (ps.executeUpdate() > 0) ? "success" : "failure";
+		} catch (Exception e) {
+            e.printStackTrace();
+            return "failure";
+        }
+	}
+	public Customer getHighestRevenueCustomer() {
+		String q = "SELECT c.* FROM customers c JOIN ("
+	             + "SELECT a.customerID, SUM(o.numShares * o.pricePerShare) AS revenue "
+	             + "FROM orders o JOIN accounts a ON o.accountNum = a.accountNum "
+	             + "GROUP BY a.customerID ORDER BY revenue DESC LIMIT 1"
+	             + ") topCust ON c.customerID = topCust.customerID";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement ps = cn.prepareStatement(q);
+	         ResultSet rs = ps.executeQuery()) {
+
+	        return rs.next() ? mapCustomer(rs) : null;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
+	public Customer getCustomer(long id) {
+	    String q = "SELECT * FROM customers WHERE customerID = ?";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement ps = cn.prepareStatement(q)) {
+	        ps.setLong(1, id);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            return rs.next() ? mapCustomer(rs) : null;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 
 	public Customer getCustomer(String id) {
-		return tryQuery(() -> find(Long.parseLong(id)));
+	    try {
+	        return getCustomer(Long.parseLong(id));
+	    } catch (NumberFormatException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
+	
+	public List<Customer> getCustomers(String keyword) {
+	    String like = "%" + (keyword == null ? "" : keyword) + "%";
+	    String q = "SELECT * FROM customers WHERE firstName LIKE ? OR lastName LIKE ? OR email LIKE ?";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement ps = cn.prepareStatement(q)) {
 
-	public List<Customer> getCustomers(String kw) {
-		return tryQuery(() -> search(kw));
+	        ps.setString(1, like);
+	        ps.setString(2, like);
+	        ps.setString(3, like);
+	        ResultSet rs = ps.executeQuery();
+	        List<Customer> list = new ArrayList<>();
+	        while (rs.next())
+	            list.add(mapCustomer(rs));
+	        return list;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return new ArrayList<>();
+	    }
 	}
-
+	
 	public List<Customer> getAllCustomers() {
-		return tryQuery(() -> search(""));
-	}
+	    String q = "SELECT * FROM customers";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement ps = cn.prepareStatement(q);
+	         ResultSet rs = ps.executeQuery()) {
 
+	        List<Customer> list = new ArrayList<>();
+	        while (rs.next())
+	            list.add(mapCustomer(rs));
+	        return list;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return new ArrayList<>();
+	    }
+	}
+	
 	public List<Customer> getCustomerMailingList() {
-		return tryQuery(this::mailingList);
+	    String q = "SELECT * FROM customers WHERE email IS NOT NULL AND email <> ''";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement ps = cn.prepareStatement(q);
+	         ResultSet rs = ps.executeQuery()) {
+
+	        List<Customer> list = new ArrayList<>();
+	        while (rs.next())
+	            list.add(mapCustomer(rs));
+	        return list;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return new ArrayList<>();
+	    }
+	}
+	
+	private Customer mapCustomer(ResultSet r) {
+		
+	    try {
+	        Customer c = new Customer();
+	        Location l = new Location();
+
+	        c.setClientId(String.valueOf(r.getLong("customerID")));
+	        c.setFirstName(r.getString("firstName"));
+	        c.setLastName(r.getString("lastName"));
+	        c.setAddress(r.getString("address"));
+
+	        l.setCity(r.getString("city"));
+	        l.setState(r.getString("state"));
+	        l.setZipCode(Integer.valueOf(r.getString("zipCode")));
+	        c.setLocation(l);
+	        
+	        
+	        c.setAccountNumber((int)getAccountNum(String.valueOf(r.getLong("customerID"))));
+	        c.setTelephone(r.getString("telephone"));
+	        c.setEmail(r.getString("email"));
+	        c.setAccountCreationTime(r.getDate("accountCreationDate").toString());
+	        c.setCreditCard(r.getString("creditCard"));
+	        c.setRating(r.getInt("rating"));
+
+	        return c;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 
-	public String getCustomerID(String email) {
-		return tryQuery(() -> idFromEmail(email));
-	}
+	public static long getAccountNum(String customerId) {
+		String q = ""
+			      + "SELECT accountNum "
+			      + "  FROM accounts a "
+			      + " WHERE customerID = ?";
+			    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+			         PreparedStatement ps = cn.prepareStatement(q)) {
 
-	public Customer getHighestRevenueCustomer() {
-		return tryQuery(this::highestRated);
+			        ps.setLong(1, Long.valueOf(customerId));
+			        try (ResultSet rs = ps.executeQuery()) {
+			            return rs.next()
+			                 ? rs.getLong("accountNum")
+			                 : -1;
+			        }
+			    } catch (SQLException e) {
+			        e.printStackTrace();
+			        return -1;
+			    }
 	}
+	
+	public String getCustomerID(String username) {
+	    String q = "SELECT a.customerID FROM login l "
+	             + "JOIN accounts a ON l.accountNum = a.accountNum "
+	             + "WHERE l.username = ?";
+	    try (Connection cn = DriverManager.getConnection(URL, USER, PASS);
+	         PreparedStatement ps = cn.prepareStatement(q)) {
 
-	private int insert(Customer c) throws SQLException {
-		String sql = "INSERT INTO Customers " + "(CustomerID,FirstName,LastName,Address,City,State,ZipCode,"
-				+ "Telephone,EmailAddress,AccountCreationDate,CreditCardNumber,Rating)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-		try (Connection cn = conn(); PreparedStatement ps = cn.prepareStatement(sql)) {
-			fill(ps, c);
-			ps.setInt(12, c.getRating());
-			return ps.executeUpdate();
-		}
-	}
-
-	private int update(Customer c) throws SQLException {
-		String sql = "UPDATE Customers SET FirstName=?,LastName=?,Address=?,City=?,State=?,ZipCode=?,"
-				+ "Telephone=?,EmailAddress=?,CreditCardNumber=?,Rating=? WHERE CustomerID=?";
-		try (Connection cn = conn(); PreparedStatement ps = cn.prepareStatement(sql)) {
-			fill(ps, c);
-			ps.setInt(10, c.getRating());
-			ps.setLong(11, c.getCustomerID());
-			return ps.executeUpdate();
-		}
-	}
-
-	private void fill(PreparedStatement ps, Customer c) throws SQLException {
-		ps.setLong(1, c.getCustomerID());
-		ps.setString(2, c.getFirstName());
-		ps.setString(3, c.getLastName());
-		ps.setString(4, c.getAddress());
-		ps.setString(5, c.getLocation().getCity());
-		ps.setString(6, c.getLocation().getState());
-		ps.setString(7, c.getLocation().getZipCode());
-		ps.setString(8, c.getTelephone());
-		ps.setString(9, c.getEmail());
-		ps.setDate(10, toSql(c.getAccountCreationDate()));
-		ps.setString(11, c.getCreditCard());
-	}
-
-	private int delete(long id) throws SQLException {
-		try (Connection c = conn();
-				PreparedStatement ps = c.prepareStatement("DELETE FROM Customers WHERE CustomerID=?")) {
-			ps.setLong(1, id);
-			return ps.executeUpdate();
-		}
-	}
-
-	private Customer find(long id) throws SQLException {
-		try (Connection c = conn();
-				PreparedStatement ps = c.prepareStatement("SELECT * FROM Customers WHERE CustomerID=?")) {
-			ps.setLong(1, id);
-			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next() ? map(rs) : null;
-			}
-		}
-	}
-
-	private List<Customer> search(String kw) throws SQLException {
-		String like = "%" + (kw == null ? "" : kw) + "%";
-		String sql = "SELECT * FROM Customers WHERE FirstName LIKE ? OR LastName LIKE ? OR EmailAddress LIKE ?";
-		try (Connection c = conn(); PreparedStatement ps = c.prepareStatement(sql)) {
-			ps.setString(1, like);
-			ps.setString(2, like);
-			ps.setString(3, like);
-			try (ResultSet rs = ps.executeQuery()) {
-				List<Customer> out = new ArrayList<>();
-				while (rs.next())
-					out.add(map(rs));
-				return out;
-			}
-		}
-	}
-
-	private List<Customer> mailingList() throws SQLException {
-		List<Customer> out = new ArrayList<>();
-		try (Connection c = conn();
-				Statement st = c.createStatement();
-				ResultSet rs = st.executeQuery("SELECT EmailAddress FROM Customers")) {
-			while (rs.next()) {
-				Customer tmp = new Customer();
-				tmp.setEmail(rs.getString(1));
-				out.add(tmp);
-			}
-		}
-		return out;
-	}
-
-	private String idFromEmail(String email) throws SQLException {
-		try (Connection c = conn();
-				PreparedStatement ps = c
-						.prepareStatement("SELECT CustomerID FROM Customers WHERE EmailAddress=? LIMIT 1")) {
-			ps.setString(1, email);
-			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next() ? String.valueOf(rs.getLong(1)) : "-1";
-			}
-		}
-	}
-
-	private Customer highestRated() throws SQLException {
-		try (Connection c = conn();
-				Statement st = c.createStatement();
-				ResultSet rs = st.executeQuery("SELECT * FROM Customers ORDER BY Rating DESC LIMIT 1")) {
-			return rs.next() ? map(rs) : null;
-		}
-	}
-
-	private Customer map(ResultSet r) throws SQLException {
-		Customer c = new Customer();
-		Location l = new Location();
-		c.setCustomerID(r.getLong("CustomerID"));
-		c.setFirstName(r.getString("FirstName"));
-		c.setLastName(r.getString("LastName"));
-		c.setAddress(r.getString("Address"));
-		l.setCity(r.getString("City"));
-		l.setState(r.getString("State"));
-		l.setZipCode(r.getString("ZipCode"));
-		c.setLocation(l);
-		c.setTelephone(r.getString("Telephone"));
-		c.setEmail(r.getString("EmailAddress"));
-		c.setAccountCreationDate(r.getDate("AccountCreationDate"));
-		c.setCreditCard(r.getString("CreditCardNumber"));
-		c.setRating(r.getInt("Rating"));
-		return c;
-	}
-
-	private static Connection conn() throws SQLException {
-		return DriverManager.getConnection(URL, USER, PASS);
-	}
-
-	private static java.sql.Date toSql(java.util.Date u) {
-		return u == null ? null : new java.sql.Date(u.getTime());
-	}
-
-	private interface Exec {
-		int run() throws SQLException;
-	}
-
-	private interface Sup<T> {
-		T get() throws SQLException;
-	}
-
-	private String tryUpdate(Exec e) {
-		try {
-			return e.run() > 0 ? "success" : "failure";
-		} catch (SQLException x) {
-			x.printStackTrace();
-			return "failure";
-		}
-	}
-
-	private <T> T tryQuery(Sup<T> s) {
-		try {
-			return s.get();
-		} catch (SQLException x) {
-			x.printStackTrace();
-			return null;
-		}
+	        ps.setString(1, username);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            return rs.next()
+	                 ? String.valueOf(rs.getLong("customerID"))
+	                 : null;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 }
