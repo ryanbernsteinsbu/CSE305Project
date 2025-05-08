@@ -9,9 +9,9 @@ import model.Stock;
 
 public class StockDao {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/your_db";
+	private static final String URL = "jdbc:mysql://localhost:3306/cse305?useSSL=false";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "12345";
 	
     public Stock getDummyStock() {
         Stock stock = new Stock();
@@ -70,6 +70,7 @@ public class StockDao {
     	    }
     	} catch (Exception e) {
     		System.out.println(e);
+    		return null;
     	}
     	return stocks;
     }
@@ -98,11 +99,12 @@ public List<Stock> getAllStocks() {
         }
     } catch (Exception e) {
         System.out.println(e);
+        return null;
     }
     return stocks;
 }
 
-    public Stock getStockBySymbol(String stockSymbol) {
+public Stock getStockBySymbol(String stockSymbol) {
     Connection con = null;
     Statement  st  = null;
     ResultSet  rs  = null;
@@ -142,7 +144,7 @@ public List<Stock> getAllStocks() {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             st = con.createStatement();
-            int rows = st.executeUpdate("UPDATE stock SET sharePrice=" + stockPrice + " WHERE symbol='" + stockSymbol + "'");
+            int rows = st.executeUpdate("UPDATE stock SET sharePrice=" + stockPrice + " WHERE stockSymbol='" + stockSymbol + "'");
             return rows > 0 ? "success" : "failure";
         } catch (Exception e) {
             System.out.println(e);
@@ -181,73 +183,72 @@ public List<Stock> getAllStocks() {
 	        }
 	    } catch (Exception e) {
 	        System.out.println(e);
+	        return null;
 	    }
 	    return stocks;
 	}
 
-    public List<Stock> getCustomerBestsellers(String customerID) {
-
-		/*
-		 * The students code to fetch data from the database will be written here.
-		 * Get list of customer bestseller stocks
-		 */
-    	List<Stock> stocks = new ArrayList<Stock>();
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT s.stockName, s.stockSymbol, s.sharePrice, SUM(o.numShares) AS numShares, s.stockType " +
-                "FROM stock s JOIN orders o ON s.stockSymbol = o.stockSymbol " +
-                "WHERE o.accountNumber='" + customerID + "' " +
-                "GROUP BY s.stockSymbol, s.stockName, s.sharePrice, s.stockType " +
-                "ORDER BY SUM(o.numShares) DESC"
-            );
-            while (rs.next()) {
-                Stock s = new Stock();
-                s.setName(rs.getString("stockName"));
-                s.setSymbol(rs.getString("stockSymbol"));
-                s.setPrice(rs.getDouble("sharePrice"));
-                s.setNumShares(rs.getInt("numShares"));
-                s.setType(rs.getString("stockType"));
-                stocks.add(s);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return stocks;
-    }
-
-	public List getStocksByCustomer(String customerId) {
-
-		/*
-		 * The students code to fetch data from the database will be written here
-		 * Get stockHoldings of customer with customerId
-		 */
-		List<Stock> stocks = new ArrayList<Stock>();
+	public List<Stock> getCustomerBestsellers(String customerID) {
+	    List<Stock> stocks = new ArrayList<>();
 	    Connection con = null;
-	    Statement st = null;
-	    ResultSet rs = null;
+	    Statement  st  = null;
+	    ResultSet  rs  = null;
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        con = DriverManager.getConnection(URL, USER, PASSWORD);
-	        st = con.createStatement();
-	        rs = st.executeQuery(
-	            "SELECT s.stockName,s.stockSymbol,s.sharePrice,p.numShares,s.stockType " +
-	            "FROM stock s JOIN portfolio p " +
-	            "ON s.stockSymbol=p.stockSymbol " +
-	            "WHERE p.accountNumber='" + customerId + "'"
-	        );
+	        st  = con.createStatement();
+
+	        String query =
+	            "SELECT s.stockName, s.stockSymbol, s.sharePrice, SUM(o.numShares) AS numShares, s.stockType " +
+	            "FROM stock s " +
+	            "JOIN orders o    ON s.stockSymbol = o.stockSymbol " +
+	            "JOIN accounts a  ON o.accountNum   = a.accountNum " +
+	            "WHERE a.customerID = '" + customerID + "' " +
+	            "GROUP BY s.stockSymbol, s.stockName, s.sharePrice, s.stockType " +
+	            "ORDER BY SUM(o.numShares) DESC";
+	        rs = st.executeQuery(query);
+
 	        while (rs.next()) {
 	            Stock s = new Stock();
-	            s.setName(rs.getString("stockName"));
-	            s.setSymbol(rs.getString("stockSymbol"));
-	            s.setPrice(rs.getDouble("sharePrice"));
-	            s.setNumShares(rs.getInt("numShares"));
-	            s.setType(rs.getString("stockType"));
+	            s.setName     (rs.getString("stockName"));
+	            s.setSymbol   (rs.getString("stockSymbol"));
+	            s.setPrice    (rs.getDouble("sharePrice"));
+	            s.setNumShares(rs.getInt   ("numShares"));
+	            s.setType     (rs.getString("stockType"));
+	            stocks.add(s);
+	        }
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    }
+	    return stocks;
+	}
+
+	public List<Stock> getStocksByCustomer(String customerId) {
+	    List<Stock> stocks = new ArrayList<>();
+	    Connection con = null;
+	    Statement  st  = null;
+	    ResultSet  rs  = null;
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        con = DriverManager.getConnection(URL, USER, PASSWORD);
+	        st  = con.createStatement();
+
+	        String query =
+	            "SELECT s.stockName, s.stockSymbol, s.sharePrice, SUM(o.numShares) AS numShares, s.stockType " +
+	            "FROM stock s " +
+	            "JOIN orders o    ON s.stockSymbol = o.stockSymbol " +
+	            "JOIN accounts a  ON o.accountNum   = a.accountNum " +
+	            "WHERE a.customerID = '" + customerId + "' " +
+	            "GROUP BY s.stockSymbol, s.stockName, s.sharePrice, s.stockType";
+	        rs = st.executeQuery(query);
+
+	        while (rs.next()) {
+	            Stock s = new Stock();
+	            s.setName     (rs.getString("stockName"));
+	            s.setSymbol   (rs.getString("stockSymbol"));
+	            s.setPrice    (rs.getDouble("sharePrice"));
+	            s.setNumShares(rs.getInt   ("numShares"));
+	            s.setType     (rs.getString("stockType"));
 	            stocks.add(s);
 	        }
 	    } catch (Exception e) {
@@ -287,37 +288,37 @@ public List<Stock> getAllStocks() {
     }
 
     public List<Stock> getStockSuggestions(String customerID) {
-
-		/*
-		 * The students code to fetch data from the database will be written here
-		 * Return stock suggestions for given "customerId"
-		 */
-
-    	List<Stock> stocks = new ArrayList<Stock>();
+        List<Stock> stocks = new ArrayList<>();
         Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
+        Statement  st  = null;
+        ResultSet  rs  = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT s.stockName,s.stockSymbol,s.sharePrice,SUM(o.numShares) AS numShares,s.stockType " +
-                "FROM stock s JOIN orders o ON s.stockSymbol=o.stockSymbol " +
-                "WHERE s.stockSymbol NOT IN (" +
-                  "SELECT stockSymbol FROM portfolio " +
-                  "WHERE accountNumber='" + customerID + "'" +
+            st  = con.createStatement();
+
+            String query =
+                "SELECT s.stockName, s.stockSymbol, s.sharePrice, SUM(o.numShares) AS numShares, s.stockType " +
+                "FROM stock s " +
+                "JOIN orders o    ON s.stockSymbol = o.stockSymbol " +
+                "WHERE s.stockSymbol NOT IN ( " +
+                "    SELECT o2.stockSymbol " +
+                "    FROM orders o2 " +
+                "    JOIN accounts a2 ON o2.accountNum = a2.accountNum " +
+                "    WHERE a2.customerID = '" + customerID + "' " +
                 ") " +
-                "GROUP BY s.stockSymbol,s.stockName,s.sharePrice,s.stockType " +
-                "ORDER BY SUM(o.numShares) DESC LIMIT 5"
-            );
+                "GROUP BY s.stockSymbol, s.stockName, s.sharePrice, s.stockType " +
+                "ORDER BY SUM(o.numShares) DESC " +
+                "LIMIT 5";
+            rs = st.executeQuery(query);
+
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("stockName"));
-                s.setSymbol(rs.getString("stockSymbol"));
-                s.setPrice(rs.getDouble("sharePrice"));
-                s.setNumShares(rs.getInt("numShares"));
-                s.setType(rs.getString("stockType"));
+                s.setName     (rs.getString("stockName"));
+                s.setSymbol   (rs.getString("stockSymbol"));
+                s.setPrice    (rs.getDouble("sharePrice"));
+                s.setNumShares(rs.getInt   ("numShares"));
+                s.setType     (rs.getString("stockType"));
                 stocks.add(s);
             }
         } catch (Exception e) {
