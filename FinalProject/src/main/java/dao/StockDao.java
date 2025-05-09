@@ -329,29 +329,41 @@ public Stock getStockBySymbol(String stockSymbol) {
 
     public List<Stock> getStockPriceHistory(String stockSymbol) {
 
-		/*
-		 * The students code to fetch data from the database
-		 * Return list of stock objects, showing price history
-		 */
-    	List<Stock> stocks = new ArrayList<Stock>();
+        List<Stock> stocks = new ArrayList<Stock>();
         Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
+        Statement  st  = null;
+        ResultSet  rs  = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
-            st = con.createStatement();
-            rs = st.executeQuery(
-                "SELECT stockName,stockSymbol,sharePrice,numShares,stockType " +
-                "FROM stock WHERE stockSymbol='" + stockSymbol + "'"
-            );
+            st  = con.createStatement();
+            String sql =
+                "SELECT s.stockName, s.stockSymbol, s.stockType, " +
+                "       o.orderType, o.pricePerShare, o.percentage, o.numShares AS orderNumShares, t.sharePrice " +
+                "  FROM orders o " +
+                "  JOIN stock   t ON o.stockSymbol = t.stockSymbol " +
+                "  JOIN stock   s ON o.stockSymbol = s.stockSymbol " +
+                " WHERE o.stockSymbol = '" + stockSymbol + "' " +
+                " ORDER BY o.dateTime";
+            rs = st.executeQuery(sql);
+
             while (rs.next()) {
                 Stock s = new Stock();
-                s.setName(rs.getString("stockName"));
-                s.setSymbol(rs.getString("stockSymbol"));
-                s.setPrice(rs.getDouble("sharePrice"));
-                s.setNumShares(rs.getInt("numShares"));
-                s.setType(rs.getString("stockType"));
+                s.setName       ( rs.getString("stockName") );
+                s.setSymbol     ( rs.getString("stockSymbol") );
+                s.setType       ( rs.getString("stockType") );
+
+                double marketPrice = rs.getDouble("sharePrice");
+                String orderType   = rs.getString("orderType");
+                double price;
+//                System.out.print(orderType + "\n");
+                price = marketPrice; 
+                
+                s.setPrice(price);
+
+                // use the size of that order as the numShares in your history entry
+                s.setNumShares(rs.getInt("orderNumShares"));
+
                 stocks.add(s);
             }
         } catch (Exception e) {
@@ -359,7 +371,6 @@ public Stock getStockBySymbol(String stockSymbol) {
         }
         return stocks;
     }
-
     public List<String> getStockTypes() {
 
 		/*
