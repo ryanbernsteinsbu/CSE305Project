@@ -3,6 +3,7 @@ package dao;
 import model.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -78,32 +79,66 @@ public class OrderDao {
         return orders;
     }
 
-    public String submitOrder(Order order, Customer customer, Employee employee, Stock stock) {
-
-		/*
-		 * Student code to place stock order
-		 * Employee can be null, when the order is placed directly by Customer
-         * */
-	    
+public String submitOrder(Order order,
+                          Customer customer,
+                          Employee employee,
+                          Stock stock) {
     Connection con = null;
-    Statement  st  = null;
+    PreparedStatement psCheck, psInsert, psUpdateStock = null;
+    ResultSet rs = null;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(URL, USER, PASSWORD);
-        st  = con.createStatement();
-	
-        int    id        = order.getId();
-        Timestamp ts     = new Timestamp(order.getDatetime().getTime());
-        int    shares    = order.getNumShares();
-        int    accountNumber = customer.getAccountNumber();
-        String employeeID    = (employee != null ? "'" + employee.getEmployeeID() + "'" : "NULL");
+        con.setAutoCommit(false);
 
-        // Determine orderType and subclass‐specific columns
-        String orderType    = "unknown";
-        String buySellType  = "NULL";
-        String pricePerShare   = "NULL";
-        String percentage = "NULL";
+        int shares          = order.getNumShares();
+        int accountNumber   = customer.getAccountNumber();
+        String symbol       = stock.getSymbol();
+        String buySellType  = (order instanceof MarketOrder)
+                              ? ((MarketOrder)order).getBuySellType()
+                              : order instanceof MarketOnCloseOrder
+                                ? ((MarketOnCloseOrder)order).getBuySellType()
+                                : order instanceof HiddenStopOrder
+                                  ? "sell"  // or derive appropriately
+                                  : "sell";
 
+        // 1) Check available shares for BUY
+        if ("buy".equalsIgnoreCase(buySellType)) {
+            psCheck = con.prepareStatement(
+              "SELECT numShares FROM stock WHERE stockSymbol = ?");
+            psCheck.setString(1, symbol);
+            rs = psCheck.executeQuery();
+            if (!rs.next() || rs.getInt("numShares") < shares) {
+                con.rollback();
+                return "failure";
+            }
+            rs.close();
+            psCheck.close();
+        }
+        // 2) Check customer holdings for SELL
+        else if ("sell".equalsIgnoreCase(buySellType)) {
+            psCheck = con.prepareStatement(
+              "SELECT " +
+              "  COALESCE(SUM(CASE WHEN buySellType='buy'  THEN numShares END),0) - " +
+              "  COALESCE(SUM(CASE WHEN buySellType='sell' THEN numShares END),0) " +
+              "  AS holding " +
+              "FROM orders " +
+              "WHERE accountNum=? AND stockSymbol=?");
+            psCheck.setInt(1, accountNumber);
+            psCheck.setString(2, symbol);
+            rs = psCheck.executeQuery();
+            rs.next();
+            if (rs.getInt("holding") < shares) {
+                con.rollback();
+                return "failure";
+            }
+            rs.close();
+            psCheck.close();
+        }
+        
+        String orderType = null;
+        String pricePerShare = null;
+        String percentage = null;
         if (order instanceof MarketOrder) {
             orderType   = "market";
             buySellType = "'" + ((MarketOrder)order).getBuySellType() + "'";
@@ -120,30 +155,63 @@ public class OrderDao {
             orderType    = "trailingStop";
             percentage = String.valueOf(((TrailingStopOrder)order).getPercentage());
         }
+        // 3) Insert the order with auto-generated ID
+        String sqlInsert = "INSERT INTO orders "
+          + "(stockSymbol, dateTime, numShares,"  
+          + " orderType, accountNum, employeeID,"       
+          + " buySellType, pricePerShare, percentage) "  
+          + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        psInsert = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
+        psInsert.setString(1, symbol);
+        psInsert.setTimestamp(2,
+             new Timestamp(order.getDatetime().getTime()));
+        psInsert.setInt(3, shares);
+        psInsert.setString(4, orderType);
+        psInsert.setInt(5, accountNumber);
+        if (employee != null)
+            psInsert.setString(6, employee.getEmployeeID());
+        else
+            psInsert.setNull(6, java.sql.Types.VARCHAR);
+        psInsert.setString(7, buySellType);
+        psInsert.setString(8, pricePerShare);
+        psInsert.setString(9, percentage);
 
-        // Build and execute INSERT
-        String sql = ""
-          + "INSERT INTO orders "
-          + "(orderID, stockSymbol, dateTime, numShares, orderType, accountNum, employeeID, buySellType, pricePerShare, percentage) VALUES ("
-          +   id + ", '"
-          +   stock.getSymbol() + "', '"
-          +   ts.toString() + "', "
-          +   shares + ", '"
-	  +   orderType + "', "	
-	  +   accountNumber + ", "
-	  +   employeeID + ", "
-          +   buySellType + ", "
-          +   pricePerShare + ", "
-          +   percentage
-          + ")";
-        System.out.println(customer.getFirstName());
-        int rows = st.executeUpdate(sql);
-        return rows > 0 ? "success" : "failure";
+        int rows = psInsert.executeUpdate();
+        if (rows != 1) {
+            con.rollback();
+            return "failure";
+        }
+        // retrieve generated orderID
+        rs = psInsert.getGeneratedKeys();
+        if (rs.next()) {
+            order.setId(rs.getInt(1));
+        }
+        rs.close();
+        psInsert.close();
+
+        // 4) Update stock availability
+//        System.out.printf("buysell: %s\n", ( "'buy'".equalsIgnoreCase(buySellType) ? "- ?" : "+ ?" ));
+        String sqlUpdateStock = 
+            "UPDATE stock SET numShares = numShares "
+          + ( "'buy'".equalsIgnoreCase(buySellType)
+              ? "- ?"  
+              : "+ ?" )
+          + " WHERE stockSymbol = ?";
+        psUpdateStock = con.prepareStatement(sqlUpdateStock);
+        psUpdateStock.setInt(1, shares);
+        psUpdateStock.setString(2, symbol);
+        psUpdateStock.executeUpdate();
+
+        con.commit();
+        return "success";
     } catch (Exception e) {
+        try { if (con != null) con.rollback(); } catch(Exception ex){}
         System.out.println(e);
         return "failure";
     }
 }
+
+
 
     public List<Order> getOrderByStockSymbol(String stockSymbol) {
     List<Order> orders = new ArrayList<>();
@@ -305,9 +373,14 @@ public class OrderDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st  = con.createStatement();
         String sql =
-            "SELECT o.orderID, o.stockSymbol, o.dateTime, o.orderType, o.pricePerShare, o.percentage, s.sharePrice " +
-            "FROM orders o JOIN stock s ON o.stockSymbol = s.StockSymbol " +
-            "WHERE o.orderID = " + orderId;
+        		"SELECT o.orderID, o.stockSymbol, o.dateTime, o.orderType, o.pricePerShare, o.percentage, s.sharePrice " +
+        			    "  FROM orders o " +
+        			    "  JOIN stock   s ON o.stockSymbol = s.StockSymbol " +
+        			    " WHERE o.stockSymbol = (" +
+        			    "     SELECT stockSymbol " +
+        			    "       FROM orders " +
+        			    "      WHERE orderID = '" + orderId + "' LIMIT 1" +
+        			    " )";
         rs = st.executeQuery(sql);
         while (rs.next()) {
             OrderPriceEntry e = new OrderPriceEntry();
