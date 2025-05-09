@@ -11,10 +11,10 @@ import model.RevenueItem;
 
 public class SalesDao {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/demo";
+    private static final String URL  = "jdbc:mysql://localhost:3306/cse305?useSSL=false";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
-	
+    private static final String PASSWORD = "12345";
+    
     private List<RevenueItem> getDummyRevenueItems()
     {
         List<RevenueItem> items = new ArrayList<RevenueItem>();
@@ -45,7 +45,7 @@ public class SalesDao {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         rs = st.executeQuery(
-            "SELECT o.dateTime AS date, o.numShares AS numShares, o.accountNumber AS accountNumber, " +
+            "SELECT o.dateTime AS date, o.numShares AS numShares, o.accountNum AS accountNumber, " +
             "s.sharePrice AS pricePerShare, o.stockSymbol AS stockSymbol " +
             "FROM orders o JOIN stock s ON o.stockSymbol = s.stockSymbol " +
             "WHERE MONTH(o.dateTime) = " + month + " AND YEAR(o.dateTime) = " + year
@@ -76,13 +76,13 @@ public List<RevenueItem> getSummaryListing(String searchKeyword) {
         con = DriverManager.getConnection(URL, USER, PASSWORD);
         st = con.createStatement();
         rs = st.executeQuery(
-            "SELECT o.dateTime AS date, o.numberOfShares AS numShares, o.accountNumber AS accountId, " +
+            "SELECT o.dateTime AS date, o.numShares AS numShares, o.accountNum AS accountId, " +
             "s.sharePrice AS pricePerShare, o.stockSymbol AS stockSymbol " +
             "FROM orders o " +
             "JOIN stock s ON o.stockSymbol = s.stockSymbol " +
-            "JOIN accounts a ON o.accountNumber = a.accountNumber " +
-            "JOIN customer c ON a.customerID = c.customerID " +
-            "WHERE o.atockSymbol = '" + searchKeyword + "' " +
+            "JOIN accounts a ON o.accountNum = a.accountNum " +
+            "JOIN customers c ON a.customerID = c.customerID " +
+            "WHERE o.stockSymbol = '" + searchKeyword + "' " +
             "OR s.stockType = '" + searchKeyword + "' " +
             "OR c.lastName = '" + searchKeyword + "'"
         );
