@@ -1,7 +1,7 @@
 package com.stocktrader.controller;
 
-import dao.OrderDao;
-import model.Order;
+import com.stocktrader.dao.OrderDao;
+import com.stocktrader.model.Order;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,7 +46,7 @@ public class GetOrdersByCustomerNameController extends HttpServlet {
 		request.setAttribute("orders", orders);
 		request.setAttribute("heading", "Orders for customer name " + customerName);
 
-		RequestDispatcher rd = request.getRequestDispatcher("showOrders.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/customer/showOrders.jsp");
 		rd.forward(request, response);
 
 	}

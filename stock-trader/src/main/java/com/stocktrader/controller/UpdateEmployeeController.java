@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.EmployeeDao;
-import dao.LoginDao;
-import model.Employee;
-import model.Location;
-import model.Login;
+import com.stocktrader.dao.EmployeeDao;
+import com.stocktrader.dao.LoginDao;
+import com.stocktrader.model.Employee;
+import com.stocktrader.model.Location;
+import com.stocktrader.model.Login;
 
 /**
  * Servlet implementation class UpdateEmployeeController
@@ -62,11 +62,11 @@ public class UpdateEmployeeController extends HttpServlet {
 		employee.setFirstName(firstName);
 		employee.setLastName(lastName);
 		employee.setAddress(address);
-		employee.setStartDate(startDate);
+		employee.setStartDate(java.sql.Date.valueOf(startDate));
 		employee.setTelephone(telephone);
-		employee.setEmployeeID(ssn);
+		employee.setEmployeeID(Long.parseLong(ssn));
 		employee.setSsn(ssn);
-		employee.setHourlyRate(hourlyRate);
+		employee.setHourlyRate(java.math.BigDecimal.valueOf(hourlyRate));
         employee.setLocation(location);
 
 		EmployeeDao employeeDao = new EmployeeDao();

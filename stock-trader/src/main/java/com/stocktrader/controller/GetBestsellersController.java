@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.StockDao;
-import model.Stock;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.Stock;
 
 /**
  * Servlet implementation class GetBestsellersController
@@ -37,7 +37,7 @@ public class GetBestsellersController extends HttpServlet {
 
 		request.setAttribute("stocks", stocks);
 		request.setAttribute("heading", "Overall bestsellers");
-		RequestDispatcher rd = request.getRequestDispatcher("showStocks.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/customer/showStocks.jsp");
 		rd.forward(request, response);
 
 	}

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.OrderDao;
-import model.Order;
+import com.stocktrader.dao.OrderDao;
+import com.stocktrader.model.Order;
 
 /**
  * Servlet implementation class GetOrderHistoryController
@@ -47,7 +47,7 @@ public class GetOrderHistoryController extends HttpServlet {
 		request.setAttribute("orders", orders);
 		request.setAttribute("heading", "Customer orders");
 
-		RequestDispatcher rd = request.getRequestDispatcher("showOrders.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/customer/showOrders.jsp");
 		rd.forward(request, response);
 
 	}

@@ -1,9 +1,9 @@
 package com.stocktrader.controller;
 
-import dao.CustomerDao;
-import dao.StockDao;
-import model.Customer;
-import model.Stock;
+import com.stocktrader.dao.CustomerDao;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.Customer;
+import com.stocktrader.model.Stock;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

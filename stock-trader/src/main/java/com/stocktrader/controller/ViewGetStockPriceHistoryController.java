@@ -1,7 +1,7 @@
 package com.stocktrader.controller;
 
-import dao.StockDao;
-import model.Stock;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.Stock;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,7 +44,7 @@ public class ViewGetStockPriceHistoryController extends HttpServlet {
 
         request.setAttribute("stocks", stocks);
 
-        RequestDispatcher rd = request.getRequestDispatcher("viewGetStockPriceHistory.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/customer/viewGetStockPriceHistory.jsp");
         rd.forward(request, response);
 	}
 

@@ -1,7 +1,7 @@
 package com.stocktrader.controller;
 
-import dao.StockDao;
-import model.Stock;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.Stock;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,7 +46,7 @@ public class GetStocksByCustomerController extends HttpServlet {
 		request.setAttribute("stocks", stocks);
 		request.setAttribute("heading", "Current stock holdings");
 
-		RequestDispatcher rd = request.getRequestDispatcher("showStocks.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/customer/showStocks.jsp");
 		rd.forward(request, response);
 	}
 

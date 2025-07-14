@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CustomerDao;
-import dao.EmployeeDao;
-import model.Customer;
-import model.Employee;
+import com.stocktrader.dao.CustomerDao;
+import com.stocktrader.dao.EmployeeDao;
+import com.stocktrader.model.Customer;
+import com.stocktrader.model.Employee;
 
 /**
  * Servlet implementation class GetHighestRevenueEmployeeController

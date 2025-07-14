@@ -4,23 +4,6 @@ A Java web application for managing stock trading operations with role-based acc
 
 > **Note**: This was originally a CSE305 group project that has been personalized and enhanced with additional features and improved architecture.
 
-## 🏗️ Architecture
-
-```
-stock-trader/
-├── src/main/java/com/stocktrader/
-│   ├── controller/     # HTTP request handlers
-│   ├── service/        # Business logic
-│   ├── repository/     # Data access layer
-│   ├── model/          # Domain objects
-│   ├── config/         # Configuration
-│   └── util/           # Utilities
-├── src/main/webapp/
-│   ├── WEB-INF/views/  # JSP pages by role
-│   └── static/         # CSS, JS, assets
-└── src/main/resources/sql/  # Database scripts
-```
-
 ## 🎯 Features
 
 - **Role-Based Access**: Managers, Customer Representatives, Customers
@@ -90,7 +73,3 @@ private static final String PASSWORD = "your_password";
 ## 📝 License
 
 Educational project for CSE305 coursework.
-
----
-
-**Built with ❤️ - Enhanced from original group project** 

@@ -1,7 +1,7 @@
 package com.stocktrader.controller;
 
-import dao.StockDao;
-import model.Stock;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.Stock;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +35,7 @@ public class ViewSearchStocksController extends HttpServlet {
 		List<String> types = stockDao.getStockTypes();
 		
 		request.setAttribute("items", types);
-		RequestDispatcher rd = request.getRequestDispatcher("viewSearchStocks.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/customer/viewSearchStocks.jsp");
 		rd.forward(request, response);
 	}
 

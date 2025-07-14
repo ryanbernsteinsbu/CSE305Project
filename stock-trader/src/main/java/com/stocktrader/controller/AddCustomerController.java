@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CustomerDao;
-import dao.EmployeeDao;
-import dao.LoginDao;
-import model.Customer;
-import model.Employee;
-import model.Location;
-import model.Login;
+import com.stocktrader.dao.CustomerDao;
+import com.stocktrader.dao.EmployeeDao;
+import com.stocktrader.dao.LoginDao;
+import com.stocktrader.model.Customer;
+import com.stocktrader.model.Employee;
+import com.stocktrader.model.Location;
+import com.stocktrader.model.Login;
 
 /**
  * Servlet implementation class AddCustomerController

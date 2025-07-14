@@ -1,0 +1,1352 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:24:06.422 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:24:06.423 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:24:06.424 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:24:06.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:24:06.437 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:24:06.601 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:24:06.609 SEVERE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Failed to initialize component [Connector["http-nio-8080"]]
+	org.apache.catalina.LifecycleException: Protocol handler initialization failed
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1011)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:554)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:1046)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:686)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:709)
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:302)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:472)
+	Caused by: java.net.BindException: Address already in use
+		at java.base/sun.nio.ch.Net.bind0(Native Method)
+		at java.base/sun.nio.ch.Net.bind(Net.java:511)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:335)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:297)
+		at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:268)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:223)
+		at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1334)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1347)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:654)
+		at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:75)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1009)
+		... 11 more
+14-Jul-2025 17:24:06.610 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [291] milliseconds
+14-Jul-2025 17:24:06.630 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:24:06.630 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:24:06.637 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:24:07.095 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:24:07.126 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [488] ms
+14-Jul-2025 17:24:07.127 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:24:07.142 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [15] ms
+14-Jul-2025 17:24:07.142 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:24:07.159 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [17] ms
+14-Jul-2025 17:24:07.159 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:24:07.238 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [79] ms
+14-Jul-2025 17:24:07.238 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:24:07.246 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [8] ms
+14-Jul-2025 17:24:07.246 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:24:07.256 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [10] ms
+14-Jul-2025 17:24:07.258 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [647] milliseconds
+14-Jul-2025 17:24:07.261 SEVERE [main] org.apache.catalina.core.StandardServer.await Failed to create server shutdown socket on address [localhost] and port [8005] (base port [8005] and offset [0])
+	java.net.BindException: Address already in use
+		at java.base/sun.nio.ch.Net.bind0(Native Method)
+		at java.base/sun.nio.ch.Net.bind(Net.java:511)
+		at java.base/sun.nio.ch.Net.bind(Net.java:500)
+		at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:630)
+		at java.base/java.net.ServerSocket.bind(ServerSocket.java:326)
+		at java.base/java.net.ServerSocket.<init>(ServerSocket.java:222)
+		at org.apache.catalina.core.StandardServer.await(StandardServer.java:581)
+		at org.apache.catalina.startup.Catalina.await(Catalina.java:825)
+		at org.apache.catalina.startup.Catalina.start(Catalina.java:773)
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+		at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473)
+14-Jul-2025 17:24:07.262 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:24:07.262 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:24:07.274 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:24:07.275 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:26:55.598 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:26:55.599 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:26:55.600 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:26:55.604 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:26:55.604 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:26:55.604 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:26:55.604 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:26:55.604 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:26:55.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:26:55.611 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:26:55.761 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:26:55.774 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [262] milliseconds
+14-Jul-2025 17:26:55.795 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:26:55.796 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:26:55.803 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:26:56.096 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:26:56.118 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [314] ms
+14-Jul-2025 17:26:56.118 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:26:56.130 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [12] ms
+14-Jul-2025 17:26:56.130 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:26:56.145 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [15] ms
+14-Jul-2025 17:26:56.145 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:26:56.215 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [70] ms
+14-Jul-2025 17:26:56.215 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:26:56.222 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [7] ms
+14-Jul-2025 17:26:56.222 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:26:56.231 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [9] ms
+14-Jul-2025 17:26:56.233 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:26:56.238 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [462] milliseconds
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+java.sql.SQLSyntaxErrorException: Table 'cse305.orders' doesn't exist
+14-Jul-2025 17:27:19.931 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:27:19.931 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:27:19.933 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:27:19.943 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [stock-trader] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+14-Jul-2025 17:27:19.943 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [stock-trader] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.lang.Object.wait0(Native Method)
+ java.base/java.lang.Object.wait(Object.java:389)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:124)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:215)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:70)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+ java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:27:19.949 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:27:19.958 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:27:24.733 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:27:24.734 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:27:24.734 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:27:24.734 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:27:24.734 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:27:24.734 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:27:24.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:27:24.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:27:24.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:27:24.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:27:24.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:27:24.740 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:27:24.740 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:27:24.741 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:27:24.748 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:27:24.900 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:27:24.912 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [265] milliseconds
+14-Jul-2025 17:27:24.933 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:27:24.933 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:27:24.940 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:27:24.948 INFO [main] org.apache.catalina.startup.ExpandWar.expand An expanded directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader] was found with a last modified time that did not match the associated WAR. It will be deleted.
+14-Jul-2025 17:27:25.273 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:27:25.298 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [357] ms
+14-Jul-2025 17:27:25.298 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:27:25.308 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [10] ms
+14-Jul-2025 17:27:25.309 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:27:25.322 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [13] ms
+14-Jul-2025 17:27:25.322 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:27:25.392 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [70] ms
+14-Jul-2025 17:27:25.392 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:27:25.400 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [8] ms
+14-Jul-2025 17:27:25.400 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:27:25.409 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [9] ms
+14-Jul-2025 17:27:25.411 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:27:25.416 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [502] milliseconds
+java.sql.SQLSyntaxErrorException: Table 'cse305.orders' doesn't exist
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+java.sql.SQLSyntaxErrorException: Table 'cse305.orders' doesn't exist
+java.sql.SQLSyntaxErrorException: Table 'cse305.orders' doesn't exist
+14-Jul-2025 17:30:04.759 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:30:04.760 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:30:04.761 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:30:04.777 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [stock-trader] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+14-Jul-2025 17:30:04.777 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [stock-trader] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.lang.Object.wait0(Native Method)
+ java.base/java.lang.Object.wait(Object.java:389)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:124)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:215)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:70)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+ java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:30:04.784 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:30:04.798 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:30:08.710 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:30:08.712 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:30:08.717 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:30:08.718 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:30:08.718 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:30:08.718 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:30:08.724 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:30:08.875 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:30:08.886 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [283] milliseconds
+14-Jul-2025 17:30:08.906 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:30:08.906 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:30:08.913 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:30:08.921 INFO [main] org.apache.catalina.startup.ExpandWar.expand An expanded directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader] was found with a last modified time that did not match the associated WAR. It will be deleted.
+14-Jul-2025 17:30:09.379 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:30:09.420 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [498] ms
+14-Jul-2025 17:30:09.420 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:30:09.437 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [17] ms
+14-Jul-2025 17:30:09.438 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:30:09.454 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [16] ms
+14-Jul-2025 17:30:09.454 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:30:09.538 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [83] ms
+14-Jul-2025 17:30:09.538 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:30:09.545 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [6] ms
+14-Jul-2025 17:30:09.545 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:30:09.553 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [8] ms
+14-Jul-2025 17:30:09.555 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:30:09.559 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [671] milliseconds
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+java.sql.SQLSyntaxErrorException: Table 'cse305.orders' doesn't exist
+java.sql.SQLSyntaxErrorException: Table 'cse305.orders' doesn't exist
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+14-Jul-2025 17:34:43.805 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:34:43.805 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:34:43.807 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:34:43.814 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [stock-trader] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+14-Jul-2025 17:34:43.815 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [stock-trader] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.lang.Object.wait0(Native Method)
+ java.base/java.lang.Object.wait(Object.java:389)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:124)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:215)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:70)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+ java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:34:43.820 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:34:43.831 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:34:47.887 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:34:47.889 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:34:47.894 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:34:47.895 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:34:47.895 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:34:47.895 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:34:47.895 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:34:47.895 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:34:47.895 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:34:47.900 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:34:48.063 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:34:48.076 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [278] milliseconds
+14-Jul-2025 17:34:48.098 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:34:48.098 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:34:48.106 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:34:48.113 INFO [main] org.apache.catalina.startup.ExpandWar.expand An expanded directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader] was found with a last modified time that did not match the associated WAR. It will be deleted.
+14-Jul-2025 17:34:48.453 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:34:48.477 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [370] ms
+14-Jul-2025 17:34:48.477 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:34:48.488 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [11] ms
+14-Jul-2025 17:34:48.488 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:34:48.502 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [14] ms
+14-Jul-2025 17:34:48.503 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:34:48.566 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [63] ms
+14-Jul-2025 17:34:48.567 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:34:48.574 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [7] ms
+14-Jul-2025 17:34:48.574 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:34:48.596 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [22] ms
+14-Jul-2025 17:34:48.600 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:34:48.607 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [530] milliseconds
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+Login attempt - Username: dsmith@cs.sunysb.edu, Password: rep456, Role: customerRepresentative
+Hashed password: rep456
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=dsmith@cs.sunysb.edu and password=rep456
+Found user with role: customerRepresentative
+Login successful for user: dsmith@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Unknown column 'username' in 'where clause'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.EmployeeDao.getEmployeeID(EmployeeDao.java:166)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:54)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getAccountNum(CustomerDao.java:222)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:199)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLException: Column 'creditCard' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:580)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:966)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:203)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getAccountNum(CustomerDao.java:222)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:199)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLException: Column 'creditCard' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:580)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:966)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:203)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getAccountNum(CustomerDao.java:222)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:199)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLException: Column 'creditCard' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:580)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:966)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:203)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getAccountNum(CustomerDao.java:222)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:199)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLException: Column 'creditCard' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:580)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:966)
+	at com.stocktrader.dao.CustomerDao.mapCustomer(CustomerDao.java:203)
+	at com.stocktrader.dao.CustomerDao.getAllCustomers(CustomerDao.java:158)
+	at com.stocktrader.controller.ViewAddCustomerOrderController.doGet(ViewAddCustomerOrderController.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:39:04.609 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:39:04.609 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:39:04.611 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:39:04.619 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [stock-trader] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+14-Jul-2025 17:39:04.619 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [stock-trader] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.lang.Object.wait0(Native Method)
+ java.base/java.lang.Object.wait(Object.java:389)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:124)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:215)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:70)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+ java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:39:04.625 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:39:04.636 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:39:07.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:39:07.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:39:07.638 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:39:07.638 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:39:07.642 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:39:07.648 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:39:07.786 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:39:07.796 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [245] milliseconds
+14-Jul-2025 17:39:07.812 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:39:07.813 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:39:07.819 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:39:07.826 INFO [main] org.apache.catalina.startup.ExpandWar.expand An expanded directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader] was found with a last modified time that did not match the associated WAR. It will be deleted.
+14-Jul-2025 17:39:08.186 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:39:08.212 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [392] ms
+14-Jul-2025 17:39:08.213 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:39:08.224 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [11] ms
+14-Jul-2025 17:39:08.224 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:39:08.239 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [15] ms
+14-Jul-2025 17:39:08.239 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:39:08.310 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [71] ms
+14-Jul-2025 17:39:08.311 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:39:08.318 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [7] ms
+14-Jul-2025 17:39:08.318 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:39:08.327 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [9] ms
+14-Jul-2025 17:39:08.330 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:39:08.335 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [538] milliseconds
+14-Jul-2025 17:41:26.848 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:41:26.849 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:41:26.851 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:41:26.864 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:41:26.875 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:41:27.102 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:41:27.104 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:41:27.109 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:41:27.115 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:41:27.257 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:41:27.267 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [259] milliseconds
+14-Jul-2025 17:41:27.285 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:41:27.285 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:41:27.292 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:41:27.299 INFO [main] org.apache.catalina.startup.ExpandWar.expand An expanded directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader] was found with a last modified time that did not match the associated WAR. It will be deleted.
+14-Jul-2025 17:41:27.631 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:41:27.656 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [363] ms
+14-Jul-2025 17:41:27.656 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:41:27.667 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [11] ms
+14-Jul-2025 17:41:27.667 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:41:27.681 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [14] ms
+14-Jul-2025 17:41:27.681 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:41:27.746 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [65] ms
+14-Jul-2025 17:41:27.746 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:41:27.753 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [7] ms
+14-Jul-2025 17:41:27.753 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:41:27.761 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [8] ms
+14-Jul-2025 17:41:27.763 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:41:27.767 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [498] milliseconds
+14-Jul-2025 17:42:17.782 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/stock-trader]
+14-Jul-2025 17:42:17.809 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:42:17.978 INFO [Catalina-utility-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:42:17.983 INFO [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [174] ms
+14-Jul-2025 17:42:18.087 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:42:18.087 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:42:18.089 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:42:18.096 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:42:18.098 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:42:21.016 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:42:21.017 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:42:21.017 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:42:21.017 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:42:21.017 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:42:21.017 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:42:21.018 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:42:21.018 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:42:21.018 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:42:21.018 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:42:21.018 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:42:21.022 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:42:21.028 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:42:21.167 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:42:21.178 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [256] milliseconds
+14-Jul-2025 17:42:21.195 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:42:21.195 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:42:21.202 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:42:21.504 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:42:21.526 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [324] ms
+14-Jul-2025 17:42:21.526 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:42:21.537 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [11] ms
+14-Jul-2025 17:42:21.537 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:42:21.553 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [16] ms
+14-Jul-2025 17:42:21.553 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:42:21.625 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [72] ms
+14-Jul-2025 17:42:21.625 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:42:21.632 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [7] ms
+14-Jul-2025 17:42:21.632 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:42:21.641 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [9] ms
+14-Jul-2025 17:42:21.643 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:42:21.647 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [468] milliseconds
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:45:35.493 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:45:35.494 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:45:35.495 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:45:35.505 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [stock-trader] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+14-Jul-2025 17:45:35.506 WARNING [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [stock-trader] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.lang.Object.wait0(Native Method)
+ java.base/java.lang.Object.wait(Object.java:389)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:124)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:215)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:70)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+ java.base/java.lang.Thread.run(Thread.java:1447)
+14-Jul-2025 17:45:35.511 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:45:35.520 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:45:39.754 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:45:39.755 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:45:39.760 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:45:39.761 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:45:39.767 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:45:39.916 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:45:39.928 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [265] milliseconds
+14-Jul-2025 17:45:39.947 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:45:39.947 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:45:39.954 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:45:39.961 INFO [main] org.apache.catalina.startup.ExpandWar.expand An expanded directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader] was found with a last modified time that did not match the associated WAR. It will be deleted.
+14-Jul-2025 17:45:40.464 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:45:40.491 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [536] ms
+14-Jul-2025 17:45:40.491 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:45:40.503 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [12] ms
+14-Jul-2025 17:45:40.504 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:45:40.525 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [21] ms
+14-Jul-2025 17:45:40.525 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:45:40.614 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [89] ms
+14-Jul-2025 17:45:40.614 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:45:40.622 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [8] ms
+14-Jul-2025 17:45:40.622 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:45:40.631 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [9] ms
+14-Jul-2025 17:45:40.633 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:45:40.638 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [709] milliseconds
+14-Jul-2025 17:47:30.696 INFO [Catalina-utility-2] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/stock-trader]
+14-Jul-2025 17:47:30.720 INFO [Catalina-utility-2] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:47:30.948 INFO [Catalina-utility-2] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:47:30.953 INFO [Catalina-utility-2] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [233] ms
+14-Jul-2025 17:47:35.106 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Jul-2025 17:47:35.106 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:47:35.109 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+14-Jul-2025 17:47:35.116 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:47:35.117 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:47:39.222 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.87
+14-Jul-2025 17:47:39.223 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 11 2024 10:12:34 UTC
+14-Jul-2025 17:47:39.223 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.87.0
+14-Jul-2025 17:47:39.223 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Jul-2025 17:47:39.223 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.5
+14-Jul-2025 17:47:39.224 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-Jul-2025 17:47:39.224 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/homebrew/Cellar/openjdk/24.0.1/libexec/openjdk.jdk/Contents/Home
+14-Jul-2025 17:47:39.224 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           24.0.1
+14-Jul-2025 17:47:39.224 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Homebrew
+14-Jul-2025 17:47:39.224 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:47:39.224 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/conf/logging.properties
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:47:39.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87
+14-Jul-2025 17:47:39.229 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-Jul-2025 17:47:39.234 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/MacBook/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-Jul-2025 17:47:39.371 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:47:39.381 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [244] milliseconds
+14-Jul-2025 17:47:39.398 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-Jul-2025 17:47:39.398 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.87]
+14-Jul-2025 17:47:39.405 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war]
+14-Jul-2025 17:47:39.707 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-Jul-2025 17:47:39.755 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/stock-trader.war] has finished in [349] ms
+14-Jul-2025 17:47:39.755 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs]
+14-Jul-2025 17:47:39.765 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/docs] has finished in [10] ms
+14-Jul-2025 17:47:39.765 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager]
+14-Jul-2025 17:47:39.778 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/manager] has finished in [13] ms
+14-Jul-2025 17:47:39.778 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples]
+14-Jul-2025 17:47:39.841 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/examples] has finished in [62] ms
+14-Jul-2025 17:47:39.841 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT]
+14-Jul-2025 17:47:39.847 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/ROOT] has finished in [6] ms
+14-Jul-2025 17:47:39.847 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager]
+14-Jul-2025 17:47:39.855 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/MacBook/projects/CSE305Project/stock-trader/apache-tomcat-9.0.87/webapps/host-manager] has finished in [8] ms
+14-Jul-2025 17:47:39.857 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Jul-2025 17:47:39.861 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [478] milliseconds
+Login attempt - Username: lewis.p@cs.sunysb.edu, Password: password123, Role: customer
+Hashed password: password123
+Executing SQL: SELECT role FROM login WHERE username = ? AND password = ? with username=lewis.p@cs.sunysb.edu and password=password123
+Found user with role: customer
+Login successful for user: lewis.p@cs.sunysb.edu
+java.sql.SQLSyntaxErrorException: Table 'cse305.accounts' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:975)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1025)
+	at com.stocktrader.dao.CustomerDao.getCustomerID(CustomerDao.java:241)
+	at com.stocktrader.controller.LoginController.doGet(LoginController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:179)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:154)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1786)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+java.sql.SQLSyntaxErrorException: Unknown column 'numShares' in 'field list'

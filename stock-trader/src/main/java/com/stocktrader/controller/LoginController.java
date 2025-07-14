@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CustomerDao;
-import dao.EmployeeDao;
-import dao.LoginDao;
-import model.Login;
+import com.stocktrader.dao.CustomerDao;
+import com.stocktrader.dao.EmployeeDao;
+import com.stocktrader.dao.LoginDao;
+import com.stocktrader.model.Login;
 /**
  * Servlet implementation class LoginController
  */
@@ -46,20 +46,20 @@ public class LoginController extends HttpServlet {
 			if(role.equals("manager")) {
 				EmployeeDao employeeDao = new EmployeeDao();
 				String employeeID = employeeDao.getEmployeeID(username);
-				request.getSession(true).setAttribute("employeeID", employeeID);				
-				response.sendRedirect("managerHome.jsp");
+				request.getSession(true).setAttribute("employeeID", employeeID);
+				request.getRequestDispatcher("/WEB-INF/views/admin/managerHome.jsp").forward(request, response);
 			}
 			else if(role.equals("customerRepresentative")) {
 				EmployeeDao employeeDao = new EmployeeDao();
 				String employeeID = employeeDao.getEmployeeID(username);
-				request.getSession(true).setAttribute("employeeID", employeeID);				
-				response.sendRedirect("customerRepresentativeHome.jsp");
+				request.getSession(true).setAttribute("employeeID", employeeID);
+				request.getRequestDispatcher("/WEB-INF/views/representative/customerRepresentativeHome.jsp").forward(request, response);
 			}
 			else {
 				CustomerDao customerDao = new CustomerDao();
 				String customerID = customerDao.getCustomerID(username);
 				request.getSession(true).setAttribute("customerID", customerID);
-				response.sendRedirect("home.jsp");	
+				request.getRequestDispatcher("/WEB-INF/views/customer/home.jsp").forward(request, response);
 			}
 
 		}
@@ -73,7 +73,11 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Add this to handle /home route
+		if (request.getServletPath().equals("/home")) {
+			request.getRequestDispatcher("/WEB-INF/views/customer/home.jsp").forward(request, response);
+			return;
+		}
 		doGet(request, response);
 	}
 

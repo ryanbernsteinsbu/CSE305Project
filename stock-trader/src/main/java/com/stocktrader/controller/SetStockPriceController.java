@@ -1,12 +1,12 @@
 package com.stocktrader.controller;
 
-import dao.EmployeeDao;
-import dao.LoginDao;
-import dao.StockDao;
-import model.Employee;
-import model.Location;
-import model.Login;
-import model.Stock;
+import com.stocktrader.dao.EmployeeDao;
+import com.stocktrader.dao.LoginDao;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.Employee;
+import com.stocktrader.model.Location;
+import com.stocktrader.model.Login;
+import com.stocktrader.model.Stock;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,10 +49,37 @@ public class SetStockPriceController extends HttpServlet {
 		String result = stockDao.setStockPrice(stockSymbol, Double.parseDouble(stockPrice));
 
 		if(result.equals("success")) {
-				response.sendRedirect("home.jsp?status=success");
-		}
-		else {
-			response.sendRedirect("home.jsp?status=error");
+			String role = (String) request.getSession().getAttribute("role");
+			if (role != null) {
+				if (role.equals("manager")) {
+					request.setAttribute("status", "success");
+					request.getRequestDispatcher("/WEB-INF/views/admin/managerHome.jsp").forward(request, response);
+				} else if (role.equals("customerRepresentative")) {
+					request.setAttribute("status", "success");
+					request.getRequestDispatcher("/WEB-INF/views/representative/customerRepresentativeHome.jsp").forward(request, response);
+				} else {
+					request.setAttribute("status", "success");
+					request.getRequestDispatcher("/WEB-INF/views/customer/home.jsp").forward(request, response);
+				}
+			} else {
+				response.sendRedirect("index.jsp");
+			}
+		} else {
+			String role = (String) request.getSession().getAttribute("role");
+			if (role != null) {
+				if (role.equals("manager")) {
+					request.setAttribute("status", "error");
+					request.getRequestDispatcher("/WEB-INF/views/admin/managerHome.jsp").forward(request, response);
+				} else if (role.equals("customerRepresentative")) {
+					request.setAttribute("status", "error");
+					request.getRequestDispatcher("/WEB-INF/views/representative/customerRepresentativeHome.jsp").forward(request, response);
+				} else {
+					request.setAttribute("status", "error");
+					request.getRequestDispatcher("/WEB-INF/views/customer/home.jsp").forward(request, response);
+				}
+			} else {
+				response.sendRedirect("index.jsp");
+			}
 		}
 	}
 

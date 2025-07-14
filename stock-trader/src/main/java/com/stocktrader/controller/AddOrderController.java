@@ -1,10 +1,10 @@
 package com.stocktrader.controller;
 
-import dao.CustomerDao;
-import dao.EmployeeDao;
-import dao.OrderDao;
-import dao.StockDao;
-import model.*;
+import com.stocktrader.dao.CustomerDao;
+import com.stocktrader.dao.EmployeeDao;
+import com.stocktrader.dao.OrderDao;
+import com.stocktrader.dao.StockDao;
+import com.stocktrader.model.*;
 
 import java.io.IOException;
 import java.util.Date;
@@ -107,11 +107,11 @@ public class AddOrderController extends HttpServlet {
         RequestDispatcher rd;
 
         if (result.equals("success")) {
-            rd = request.getRequestDispatcher("home.jsp?result=success");
+            rd = request.getRequestDispatcher("/WEB-INF/views/customer/home.jsp?result=success");
         }
         else
         {
-            rd = request.getRequestDispatcher("home.jsp?result=error");
+            rd = request.getRequestDispatcher("/WEB-INF/views/customer/home.jsp?result=error");
         }
         rd.forward(request, response);
 
